@@ -278,7 +278,7 @@ const props = defineProps<{
     />
     <path
       d="M15 8.5L9 14.5M9 8.5L15 14.5"
-      stroke="black"
+      stroke="currentColor"
       stroke-width="1.5"
       stroke-linecap="round"
       stroke-linejoin="round"
