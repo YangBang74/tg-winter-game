@@ -1,0 +1,30 @@
+@import 'tailwindcss';
+@import './fonts.css';
+
+body {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #000;
+  background: radial-gradient(50% 50% at 50% 50%, #01978b 0%, #006e65 100%);
+}
+
+:root {
+  --color-brand-primary: #0095ef;
+  --color-brand-accent: #a79eff;
+  --color-brand-sky: #8ce9ff;
+}
+
+@layer utilities {
+  .text-primary {
+    color: var(--color-brand-primary);
+  }
+
+  .text-accent {
+    color: var(--color-brand-accent);
+  }
+
+  .text-sky {
+    color: var(--color-brand-sky);
+  }
+}
