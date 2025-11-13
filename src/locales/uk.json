@@ -46,6 +46,25 @@
         "title": "Магазин нагород",
         "description": "Обмінюйте очки на ексклюзивні стікери, скіни та мерч."
       }
+    },
+    "cta": {
+      "common": {
+        "open": "Відкрити"
+      },
+      "advent": {
+        "titleLine1": "Відкривай адвент",
+        "titleLine2": "календарі",
+        "subtitle": "Отримуй подарунки"
+      },
+      "roulette": {
+        "titleLine1": "Грай у",
+        "titleLine2": "рулетку",
+        "prize": "0.00005 TON"
+      },
+      "lottery": {
+        "titleLine1": "Грай у",
+        "titleLine2": "лотерею"
+      }
     }
   },
   "about": {

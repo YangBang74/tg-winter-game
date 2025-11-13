@@ -1,20 +1,18 @@
-<script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-
-const { t } = useI18n()
-</script>
-
 <template>
   <section class="about">
-    <h1 class="about__title">{{ t('about.title') }}</h1>
+    <h1 class="about__title">О проекте</h1>
     <p class="about__text">
-      {{ t('about.paragraphs.mission') }}
+      Winter Game — это сезонная игровая платформа, разработанная специально для Telegram. Наша цель
+      — объединить игроков в тесном комьюнити, где они могут соревноваться, выполнять задания и
+      получать уникальные награды.
     </p>
     <p class="about__text">
-      {{ t('about.paragraphs.technology') }}
+      Проект построен с использованием современных веб-технологий и оптимизирован для мгновенной
+      загрузки внутри мини-приложений. Мы постоянно расширяем набор уровней, добавляем командные
+      события и внедряем новые механики, чтобы поддерживать интерес игроков.
     </p>
     <p class="about__text">
-      {{ t('about.paragraphs.feedback') }}
+      Если у вас есть идеи или вопросы, пишите нам — мы всегда открыты для обратной связи!
     </p>
   </section>
 </template>

@@ -46,6 +46,25 @@
         "title": "Reward Store",
         "description": "Exchange points for exclusive stickers, skins, and merchandise."
       }
+    },
+    "cta": {
+      "common": {
+        "open": "Open"
+      },
+      "advent": {
+        "titleLine1": "Open advent",
+        "titleLine2": "calendars",
+        "subtitle": "Collect gifts"
+      },
+      "roulette": {
+        "titleLine1": "Play the",
+        "titleLine2": "roulette",
+        "prize": "0.00005 TON"
+      },
+      "lottery": {
+        "titleLine1": "Play the",
+        "titleLine2": "lottery"
+      }
     }
   },
   "about": {

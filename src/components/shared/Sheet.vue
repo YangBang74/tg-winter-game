@@ -61,7 +61,7 @@ onBeforeUnmount(() => {
             @click.stop
           >
             <button
-              class="absolute right-4 top-4 flex h-7 w-7 items-center justify-center rounded-full bg-black/5 text-lg font-medium text-black/70 transition hover:bg-black/10 hover:text-black"
+              class="absolute z-100 right-4 top-4 flex h-7 w-7 items-center justify-center rounded-full bg-black/5 text-lg font-medium text-black/70 transition hover:bg-black/10 hover:text-black"
               type="button"
               aria-label="Закрыть"
               @click="close"
