@@ -8,7 +8,7 @@ import { SUPPORT_LOCALES, setI18nLanguage, type AppLocale } from '@/plugins/i18n
 
 defineOptions({ name: 'AppHeader' })
 
-const isSettingsOpen = ref(true)
+const isSettingsOpen = ref(false)
 const isSoundEnabled = ref(true)
 const isVibrationEnabled = ref(true)
 

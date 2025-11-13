@@ -5,6 +5,8 @@ import AboutView from '@/views/AboutView.vue'
 import BalanceView from '@/views/BalanceView.vue'
 import FriendsView from '@/views/FriendsView.vue'
 import HomeView from '@/views/HomeView.vue'
+import RouletteDetailView from '@/views/RouletteDetailView.vue'
+import RouletteView from '@/views/RouletteView.vue'
 import TasksView from '@/views/TasksView.vue'
 
 const router = createRouter({
@@ -38,6 +40,16 @@ const router = createRouter({
           path: 'about',
           name: 'about',
           component: AboutView,
+        },
+        {
+          path: 'roulette',
+          name: 'roulette',
+          component: RouletteView,
+        },
+        {
+          path: 'roulette/:id',
+          name: 'roulette-detail',
+          component: RouletteDetailView,
         },
       ],
     },
