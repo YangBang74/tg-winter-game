@@ -30,7 +30,5 @@ const formattedPrice = computed(() => {
       <template v-else-if="card">Кейс за {{ formattedPrice }}</template>
       <template v-else>Кейс</template>
     </h2>
-
-    
   </div>
 </template>
