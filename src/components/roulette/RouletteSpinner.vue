@@ -32,7 +32,9 @@ const emit = defineEmits<{
 
 const itemWidth = computed(() => props.itemWidth ?? 0)
 const gap = computed(() => props.gap ?? 16)
-const spinDuration = computed(() => props.spinDuration ?? 3000)
+const DEFAULT_SPIN_DURATION = 6000
+
+const spinDuration = computed(() => props.spinDuration ?? DEFAULT_SPIN_DURATION)
 
 const isSpinning = ref(false)
 const internalIndex = ref(0)
@@ -110,6 +112,23 @@ const resetWithoutAnimation = (targetIndex: number) => {
 
 const SPIN_ENDPOINT = 'https://twinbyai.ru/spin'
 
+const normalizePrizeIndex = (value: number) => {
+  if (Number.isNaN(value)) {
+    return null
+  }
+
+  if (value >= 0 && value < props.items.length) {
+    return value
+  }
+
+  const oneBased = value - 1
+  if (oneBased >= 0 && oneBased < props.items.length) {
+    return oneBased
+  }
+
+  return null
+}
+
 const resolvePrizeIndex = async () => {
   try {
     const response = await fetch(SPIN_ENDPOINT, { method: 'GET' })
@@ -119,13 +138,30 @@ const resolvePrizeIndex = async () => {
     }
 
     const data = await response.json().catch(() => null)
-    const rawPrizeId =
-      data?.prizeId ?? data?.prizeID ?? data?.['prize-id'] ?? data?.['prizeId'] ?? data?.id ?? null
+    const rawPrizeId = data?.['prize_id'] - 1
 
     if (typeof rawPrizeId === 'number') {
-      const prizeIndex = props.items.findIndex((item) => Number(item.id) === Number(rawPrizeId))
-      if (prizeIndex !== -1) {
-        return prizeIndex
+      const normalized = normalizePrizeIndex(rawPrizeId)
+      if (normalized !== null) {
+        return normalized
+      }
+
+      const byId = props.items.findIndex((item) => Number(item.id) === Number(rawPrizeId))
+      if (byId !== -1) {
+        return byId
+      }
+    }
+
+    if (typeof rawPrizeId === 'string') {
+      const byId = props.items.findIndex((item) => String(item.id) === rawPrizeId)
+      if (byId !== -1) {
+        return byId
+      }
+
+      const parsed = Number(rawPrizeId)
+      const normalized = normalizePrizeIndex(parsed)
+      if (normalized !== null) {
+        return normalized
       }
     }
   } catch (error) {

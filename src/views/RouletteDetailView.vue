@@ -117,9 +117,9 @@ const closeResultDialog = () => {
     <RouletteSpinner
       ref="spinnerRef"
       :items="presentData"
-      :item-width="120"
+      :item-width="191"
       :gap="18"
-      :spin-duration="3200"
+      :spin-duration="5500"
       @finished="handleFinished"
     />
 
