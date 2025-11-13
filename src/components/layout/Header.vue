@@ -58,7 +58,7 @@ const setVibration = (enabled: boolean) => {
 <template>
   <header class="flex items-center justify-between px-4 pt-2">
     <button
-      class="flex items-start gap-2 rounded-2xl bg-primary p-1.5 px-2 text-sm font-medium text-white"
+      class="flex items-start gap-2 rounded-2xl bg-primary py-2 px-2 text-sm font-medium text-white"
     >
       <Icons name="wallet" :size="20" />
       {{ t('header.connectWallet') }}
