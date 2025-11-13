@@ -1,30 +1,29 @@
 <script setup lang="ts">
-const features = [
-  {
-    title: 'Зимние задания',
-    description:
-      'Выполняйте ежедневные миссии и собирайте кристаллы для участия в сезонном рейтинге.',
-  },
-  {
-    title: 'Командные турниры',
-    description: 'Объединяйтесь с друзьями и участвуйте в турнирах внутри Telegram-чатов.',
-  },
-  {
-    title: 'Магазин наград',
-    description: 'Обменивайте очки на эксклюзивные стикеры, скины и мерч.',
-  },
-]
+import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
+
+const featureKeys = ['missions', 'tournaments', 'rewards'] as const
+
+const features = computed(() =>
+  featureKeys.map((key) => ({
+    key,
+    title: t(`home.features.${key}.title`),
+    description: t(`home.features.${key}.description`),
+  })),
+)
 </script>
 
 <template>
   <section class="home">
-    <h1 class="text-primary">Добро пожаловать в Winter Game</h1>
+    <h1 class="text-primary">{{ t('home.title') }}</h1>
     <p class="home__subtitle">
-      Игровой портал с зимними событиями и челленджами, доступный прямо в Telegram.
+      {{ t('home.subtitle') }}
     </p>
 
     <ul class="home__features">
-      <li v-for="feature in features" :key="feature.title" class="home__feature">
+      <li v-for="feature in features" :key="feature.key" class="home__feature">
         <h2 class="home__feature-title">{{ feature.title }}</h2>
         <p class="home__feature-description">{{ feature.description }}</p>
       </li>
