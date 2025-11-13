@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import Icons from '@/components/shared/Icons.vue'
 import { useI18n } from 'vue-i18n'
+import { RouterLink } from 'vue-router'
 
 const { t } = useI18n()
 </script>
 
 <template>
   <section class="text-white p-4 space-y-4">
-    <div class="advent rounded-2xl py-6 px-2.5">
+    <RouterLink to="/calendar" class="block advent rounded-2xl py-6 px-2.5">
       <h3 class="text-[1.75rem] font-bold leading-none uppercase font-raleway">
         {{ t('home.cta.advent.titleLine1') }} <br />
         {{ t('home.cta.advent.titleLine2') }}
@@ -17,8 +18,8 @@ const { t } = useI18n()
         <Icons name="calendar" />
         <span class="font-raleway font-bold">{{ t('home.cta.common.open') }}</span>
       </button>
-    </div>
-    <div class="roulete rounded-2xl py-6 px-2.5">
+    </RouterLink>
+    <RouterLink to="/roulette" class="block roulette rounded-2xl py-6 px-2.5">
       <h3 class="text-[2.625rem] font-bold leading-none uppercase font-raleway">
         {{ t('home.cta.roulette.titleLine1') }} <br />
         {{ t('home.cta.roulette.titleLine2') }}
@@ -27,8 +28,11 @@ const { t } = useI18n()
         <Icons name="tron" />
         <span class="font-bold">{{ t('home.cta.roulette.prize') }}</span>
       </button>
-    </div>
-    <div class="lottery flex flex-col items-center gap-3 rounded-2xl py-6 pb-10 px-2.5">
+    </RouterLink>
+    <RouterLink
+      to="/lottery"
+      class="lottery flex flex-col items-center gap-3 rounded-2xl py-6 pb-10 px-2.5"
+    >
       <h3 class="text-[2.625rem] font-bold leading-none uppercase font-raleway">
         {{ t('home.cta.lottery.titleLine1') }} <br />
         {{ t('home.cta.lottery.titleLine2') }}
@@ -37,7 +41,7 @@ const { t } = useI18n()
         <Icons name="calendar" />
         <span class="font-raleway font-bold">{{ t('home.cta.common.open') }}</span>
       </button>
-    </div>
+    </RouterLink>
   </section>
 </template>
 <style scoped>
@@ -45,7 +49,7 @@ const { t } = useI18n()
   background: url('@/assets/images/home/advent-card.png') no-repeat center center;
   background-size: cover;
 }
-.roulete {
+.roulette {
   background: url('@/assets/images/home/roulete-card.png') no-repeat center center;
   background-size: cover;
 }
