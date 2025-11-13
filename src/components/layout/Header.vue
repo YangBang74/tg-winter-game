@@ -1,38 +1,49 @@
 <script setup lang="ts">
 import { computed, defineOptions, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 import Icons from '@/components/shared/Icons.vue'
 import Sheet from '@/components/shared/Sheet.vue'
-
-type LanguageId = 'en' | 'ru' | 'ukr'
+import { SUPPORT_LOCALES, setI18nLanguage, type AppLocale } from '@/plugins/i18n'
 
 defineOptions({ name: 'AppHeader' })
 
 const isSettingsOpen = ref(false)
-const selectedLanguage = ref<LanguageId>('ru')
 const isSoundEnabled = ref(true)
 const isVibrationEnabled = ref(true)
 
-const languageOptions = computed(() => [
-  {
-    id: 'en' as const,
-    label: 'ENG',
-    image: new URL('../../assets/images/uk.png', import.meta.url).href,
-  },
-  {
-    id: 'ru' as const,
-    label: 'RUS',
-    image: new URL('../../assets/images/ru.png', import.meta.url).href,
-  },
-  {
-    id: 'ukr' as const,
-    label: 'UKR',
-    image: new URL('../../assets/images/ukr.png', import.meta.url).href,
-  },
-])
+const { t, locale } = useI18n()
 
-const selectLanguage = (id: LanguageId) => {
-  selectedLanguage.value = id
+const flagSources: Record<AppLocale, string> = {
+  en: new URL('../../assets/images/uk.png', import.meta.url).href,
+  ru: new URL('../../assets/images/ru.png', import.meta.url).href,
+  uk: new URL('../../assets/images/ukr.png', import.meta.url).href,
+}
+
+const currentLocale = computed<AppLocale>({
+  get: () => locale.value as AppLocale,
+  set: (value) => {
+    if (locale.value !== value) {
+      locale.value = value
+      setI18nLanguage(value)
+    }
+  },
+})
+
+const languageOrder: AppLocale[] = ['en', 'ru', 'uk']
+
+const languageOptions = computed(() =>
+  languageOrder
+    .filter((id) => SUPPORT_LOCALES.includes(id))
+    .map((id) => ({
+      id,
+      label: t(`settings.languages.${id}`),
+      image: flagSources[id],
+    })),
+)
+
+const selectLanguage = (id: AppLocale) => {
+  currentLocale.value = id
 }
 
 const setSound = (enabled: boolean) => {
@@ -50,7 +61,7 @@ const setVibration = (enabled: boolean) => {
       class="flex items-start gap-2 rounded-2xl bg-primary p-1.5 px-2 text-sm font-medium text-white"
     >
       <Icons name="wallet" :size="20" />
-      Connect wallet
+      {{ t('header.connectWallet') }}
     </button>
 
     <Sheet v-model:open="isSettingsOpen">
@@ -67,17 +78,17 @@ const setVibration = (enabled: boolean) => {
               class="flex w-full items-center justify-center gap-2.5 rounded-full bg-[#A79EFF] py-3.5 text-white"
             >
               <Icons name="down-arrow" />
-              <span class="font-raleway font-bold">Пополнить</span>
+              <span class="font-raleway font-bold">{{ t('settings.actions.deposit') }}</span>
             </button>
             <button
               class="flex w-full items-center justify-center gap-2.5 rounded-full border border-[#E4E4E4] bg-white py-3.5 text-black"
             >
-              <span class="font-raleway font-bold">Вывести</span>
+              <span class="font-raleway font-bold">{{ t('settings.actions.withdraw') }}</span>
               <Icons name="up-arrow" />
             </button>
           </div>
 
-          <h2 class="text-center text-2xl font-bold uppercase">Настройки</h2>
+          <h2 class="text-center text-2xl font-bold uppercase">{{ t('settings.title') }}</h2>
 
           <div class="space-y-2.5 text-sm font-semibold">
             <div class="flex gap-2 border-b border-[#EFEFEF] pb-2.5">
@@ -87,7 +98,7 @@ const setVibration = (enabled: boolean) => {
                 type="button"
                 class="flex flex-1 items-center justify-center gap-2 rounded-full border px-3 py-2 transition"
                 :class="
-                  selectedLanguage === language.id
+                  currentLocale === language.id
                     ? 'bg-[#0095EF] text-white border-[#0095EF]'
                     : 'bg-white text-[#484C52] border-[#E4E4E4]'
                 "
@@ -110,7 +121,7 @@ const setVibration = (enabled: boolean) => {
                 @click="setSound(true)"
               >
                 <Icons name="sound" :size="20" />
-                Со звуком
+                {{ t('settings.sound.on') }}
               </button>
               <button
                 type="button"
@@ -123,7 +134,7 @@ const setVibration = (enabled: boolean) => {
                 @click="setSound(false)"
               >
                 <Icons name="muted" :size="20" />
-                Без звука
+                {{ t('settings.sound.off') }}
               </button>
             </div>
 
@@ -139,7 +150,7 @@ const setVibration = (enabled: boolean) => {
                 @click="setVibration(true)"
               >
                 <Icons name="vibro" :size="20" />
-                С вибрацией
+                {{ t('settings.vibration.on') }}
               </button>
               <button
                 type="button"
@@ -152,7 +163,7 @@ const setVibration = (enabled: boolean) => {
                 @click="setVibration(false)"
               >
                 <Icons name="no-vibro" :size="20" />
-                Без вибрации
+                {{ t('settings.vibration.off') }}
               </button>
             </div>
 
@@ -161,7 +172,7 @@ const setVibration = (enabled: boolean) => {
               class="flex w-full items-center justify-center gap-2 rounded-full bg-[#484C52] px-3 py-3 text-base font-semibold text-white transition hover:bg-[#3b3f44]"
             >
               <Icons name="chat-q" :size="20" />
-              Поддержка
+              {{ t('settings.support') }}
             </button>
           </div>
         </div>

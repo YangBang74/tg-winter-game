@@ -6,6 +6,30 @@
   "layout": {
     "languageLabel": "Language"
   },
+  "header": {
+    "connectWallet": "Connect wallet"
+  },
+  "settings": {
+    "title": "Settings",
+    "actions": {
+      "deposit": "Top up",
+      "withdraw": "Withdraw"
+    },
+    "languages": {
+      "en": "ENG",
+      "ru": "RUS",
+      "uk": "UKR"
+    },
+    "sound": {
+      "on": "With sound",
+      "off": "Mute"
+    },
+    "vibration": {
+      "on": "With vibration",
+      "off": "No vibration"
+    },
+    "support": "Support"
+  },
   "home": {
     "title": "Welcome to Winter Game",
     "subtitle": "A seasonal event and challenge hub available right inside Telegram.",

@@ -6,6 +6,30 @@
   "layout": {
     "languageLabel": "Мова"
   },
+  "header": {
+    "connectWallet": "Під'єднати гаманець"
+  },
+  "settings": {
+    "title": "Налаштування",
+    "actions": {
+      "deposit": "Поповнити",
+      "withdraw": "Вивести"
+    },
+    "languages": {
+      "en": "ENG",
+      "ru": "RUS",
+      "uk": "UKR"
+    },
+    "sound": {
+      "on": "Зі звуком",
+      "off": "Без звуку"
+    },
+    "vibration": {
+      "on": "З вібрацією",
+      "off": "Без вібрації"
+    },
+    "support": "Підтримка"
+  },
   "home": {
     "title": "Ласкаво просимо до Winter Game",
     "subtitle": "Ігровий портал із зимовими подіями та челленджами, доступний просто в Telegram.",
@@ -33,4 +57,3 @@
     }
   }
 }
-

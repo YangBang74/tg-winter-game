@@ -6,6 +6,30 @@
   "layout": {
     "languageLabel": "Язык"
   },
+  "header": {
+    "connectWallet": "Подключить кошелёк"
+  },
+  "settings": {
+    "title": "Настройки",
+    "actions": {
+      "deposit": "Пополнить",
+      "withdraw": "Вывести"
+    },
+    "languages": {
+      "en": "ENG",
+      "ru": "RUS",
+      "uk": "UKR"
+    },
+    "sound": {
+      "on": "Со звуком",
+      "off": "Без звука"
+    },
+    "vibration": {
+      "on": "С вибрацией",
+      "off": "Без вибрации"
+    },
+    "support": "Поддержка"
+  },
   "home": {
     "title": "Добро пожаловать в Winter Game",
     "subtitle": "Игровой портал с зимними событиями и челленджами, доступный прямо в Telegram.",
@@ -33,4 +57,3 @@
     }
   }
 }
-
