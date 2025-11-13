@@ -46,6 +46,25 @@
         "title": "Магазин наград",
         "description": "Обменивайте очки на эксклюзивные стикеры, скины и мерч."
       }
+    },
+    "cta": {
+      "common": {
+        "open": "Открыть"
+      },
+      "advent": {
+        "titleLine1": "Открывай адвент",
+        "titleLine2": "календари",
+        "subtitle": "Получай подарки"
+      },
+      "roulette": {
+        "titleLine1": "Играй в",
+        "titleLine2": "рулетку",
+        "prize": "0.00005 TON"
+      },
+      "lottery": {
+        "titleLine1": "Играй в",
+        "titleLine2": "лотерею"
+      }
     }
   },
   "about": {

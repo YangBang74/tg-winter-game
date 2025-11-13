@@ -1,38 +1,41 @@
 <script setup lang="ts">
 import Icons from '@/components/shared/Icons.vue'
+import { useI18n } from 'vue-i18n'
+
+const { t } = useI18n()
 </script>
 
 <template>
   <section class="text-white p-4 space-y-4">
     <div class="advent rounded-2xl py-6 px-2.5">
       <h3 class="text-[1.75rem] font-bold leading-none uppercase font-raleway">
-        Открывай адвент <br />
-        календари
+        {{ t('home.cta.advent.titleLine1') }} <br />
+        {{ t('home.cta.advent.titleLine2') }}
       </h3>
-      <p class="pt-1 pb-2 font-medium">Получай подарки</p>
+      <p class="pt-1 pb-2 font-medium">{{ t('home.cta.advent.subtitle') }}</p>
       <button class="bg-primary py-2.5 px-4 rounded-full flex items-center gap-2">
         <Icons name="calendar" />
-        <span class="font-raleway font-bold">Открыть</span>
+        <span class="font-raleway font-bold">{{ t('home.cta.common.open') }}</span>
       </button>
     </div>
     <div class="roulete rounded-2xl py-6 px-2.5">
       <h3 class="text-[2.625rem] font-bold leading-none uppercase font-raleway">
-        Играй в <br />
-        Рулетку
+        {{ t('home.cta.roulette.titleLine1') }} <br />
+        {{ t('home.cta.roulette.titleLine2') }}
       </h3>
-      <button class="bg-primary mt-3 py-2.5 px-4 rounded-full flex items-center gap-2">
+      <button class="bg-[#9E509D] mt-3 py-2.5 px-4 rounded-full flex items-center gap-2">
         <Icons name="tron" />
-        <span class="font-bold">0.00005 TON</span>
+        <span class="font-bold">{{ t('home.cta.roulette.prize') }}</span>
       </button>
     </div>
     <div class="lottery flex flex-col items-center gap-3 rounded-2xl py-6 pb-10 px-2.5">
       <h3 class="text-[2.625rem] font-bold leading-none uppercase font-raleway">
-        Играй в <br />
-        лотерею
+        {{ t('home.cta.lottery.titleLine1') }} <br />
+        {{ t('home.cta.lottery.titleLine2') }}
       </h3>
       <button class="bg-primary py-2.5 px-4 rounded-full flex items-center gap-2">
         <Icons name="calendar" />
-        <span class="font-raleway font-bold">Открыть</span>
+        <span class="font-raleway font-bold">{{ t('home.cta.common.open') }}</span>
       </button>
     </div>
   </section>

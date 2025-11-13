@@ -8,16 +8,16 @@ import { SUPPORT_LOCALES, setI18nLanguage, type AppLocale } from '@/plugins/i18n
 
 defineOptions({ name: 'AppHeader' })
 
-const isSettingsOpen = ref(false)
+const isSettingsOpen = ref(true)
 const isSoundEnabled = ref(true)
 const isVibrationEnabled = ref(true)
 
 const { t, locale } = useI18n()
 
 const flagSources: Record<AppLocale, string> = {
-  en: new URL('../../assets/images/uk.png', import.meta.url).href,
-  ru: new URL('../../assets/images/ru.png', import.meta.url).href,
-  uk: new URL('../../assets/images/ukr.png', import.meta.url).href,
+  en: new URL('@/assets/images/uk.png', import.meta.url).href,
+  ru: new URL('@/assets/images/ru.png', import.meta.url).href,
+  uk: new URL('@/assets/images/ukr.png', import.meta.url).href,
 }
 
 const currentLocale = computed<AppLocale>({
@@ -66,7 +66,11 @@ const setVibration = (enabled: boolean) => {
 
     <Sheet v-model:open="isSettingsOpen">
       <template #trigger="{ open }">
-        <button class="rounded-full bg-[#023A35] p-2.5 text-white" type="button" @click="open">
+        <button
+          class="rounded-full bg-[#023A35] p-2.5 z-100 text-white"
+          type="button"
+          @click="open"
+        >
           <Icons name="setting" :size="20" />
         </button>
       </template>
