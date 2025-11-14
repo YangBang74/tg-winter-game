@@ -9,14 +9,14 @@ const startGame = () => {
 }
 </script>
 <template>
-  <div class="game-intro p-4 pt-0 min-h-[calc(100vh-10rem)] flex flex-col justify-between mt-4">
+  <div class="game-intro p-4 pt-0 min-h-[calc(100vh-12rem)] flex flex-col justify-between mt-4">
     <div class="text-center max-w-[15rem] mx-auto space-y-1">
       <h1 class="text-[1.5rem] text-white font-bold uppercase">Задание</h1>
       <p class="text-center text-white">Распредели подарки свайпами в нужную трубу</p>
     </div>
     <button
       @click="startGame"
-      class="flex items-center gap-2 justify-center bg-primary w-full font-bold rounded-full text-white px-4 py-2"
+      class="flex items-center relative bottom-4 gap-2 justify-center bg-primary w-full font-bold rounded-full text-white px-4 py-2.5"
     >
       <Icons name="play" />
       Запустить игру
