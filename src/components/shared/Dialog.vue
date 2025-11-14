@@ -53,11 +53,11 @@ onBeforeUnmount(() => {
         />
 
         <div
-          class="relative w-full max-w-[320px] rounded-3xl bg-white p-6 text-[#484C52] shadow-2xl transition"
+          class="relative w-full max-w-[320px] rounded-3xl bg-white p-3 text-[#484C52] shadow-2xl transition"
           @click.stop
         >
           <button
-            class="absolute right-4 top-4 flex h-7 w-7 items-center justify-center rounded-full bg-black/5 text-lg font-medium text-black/70 transition hover:bg-black/10 hover:text-black"
+            class="absolute right-2 top-2 flex h-7 w-7 items-center justify-center rounded-full bg-black/5 text-lg font-medium text-black/70 transition hover:bg-black/10 hover:text-black"
             type="button"
             aria-label="Закрыть"
             @click="close"

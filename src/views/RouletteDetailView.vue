@@ -265,10 +265,10 @@ const closeResultDialog = () => {
           <article
             v-for="item in presentData"
             :key="item.id"
-            class="flex flex-col items-center gap-2 rounded-2xl bg-white/70 p-1 text-center text-[#484C52]"
+            class="flex flex-col items-center gap-1 pb-2 rounded-2xl bg-white/70 p-1 text-center text-[#484C52]"
           >
             <div class="relative flex h-[98px] w-full items-center justify-center rounded-xl">
-              <img :src="item.image" :alt="item.title" class="h-[98px] w-[98px] object-cover" />
+              <img :src="item.image" :alt="item.title" class="h-[98px] w-[98px] object-cover rounded-xl" />
               <div
                 class="absolute flex items-center text-white rounded-full py-px px-2 justify-center gap-1 bottom-2 right-2 text-xs font-semibold uppercase bg-[#2F9FF8]"
               >
@@ -276,8 +276,7 @@ const closeResultDialog = () => {
                 <Icons name="ton" :size="14" />
               </div>
             </div>
-
-            <span class="text-sm font-semibold">{{ item.title }}</span>
+            <span class="text-sm font-semibold leading-none">{{ item.title }}</span>
           </article>
         </div>
       </section>
