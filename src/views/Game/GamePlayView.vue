@@ -71,7 +71,7 @@ const difficultyConfig = {
   },
   hard: {
     spawnInterval: { min: 2500, max: 3500 },
-    fallDuration: 200,
+    fallDuration: 95,
   },
 }
 
@@ -94,10 +94,10 @@ const boxPositions = computed(() => {
   const spacing = screenHeight / 5
 
   return {
-    red: { x: 0, y: spacing * 1, side: 'left' as const },
-    yellow: { x: window.innerWidth - 80, y: spacing * 1, side: 'right' as const },
-    blue: { x: 0, y: spacing * 2.5, side: 'left' as const },
-    violet: { x: window.innerWidth - 80, y: spacing * 2.5, side: 'right' as const },
+    red: { x: 0, y: spacing * 0.8, side: 'left' as const },
+    yellow: { x: window.innerWidth - 80, y: spacing * 0.8, side: 'right' as const },
+    blue: { x: 0, y: spacing * 2, side: 'left' as const },
+    violet: { x: window.innerWidth - 80, y: spacing * 2, side: 'right' as const },
   }
 })
 
@@ -232,11 +232,27 @@ const onGiftMouseDown = (event: MouseEvent | TouchEvent, gift: Gift) => {
   event.preventDefault()
   if (gift.caught || !isGameActive.value) return
 
+  const { x: clientX, y: clientY } = getEventCoordinates(event)
+
+  // Получаем реальные координаты элемента из DOM, чтобы избежать рассинхронизации
+  const target = event.target as HTMLElement
+  const giftElement = target.closest('.gift') as HTMLElement
+  if (giftElement) {
+    const rect = giftElement.getBoundingClientRect()
+    // Центр элемента (из-за transform: translate(-50%, -50%))
+    const elementCenterX = rect.left + rect.width / 2
+    const elementCenterY = rect.top + rect.height / 2
+
+    // Обновляем координаты подарка реальными координатами из DOM
+    gift.x = elementCenterX
+    gift.y = elementCenterY
+  }
+
+  // Помечаем подарок как пойманный после синхронизации координат
   gift.caught = true
   selectedGift.value = gift
 
-  const { x: clientX, y: clientY } = getEventCoordinates(event)
-
+  // Вычисляем offset относительно реальной позиции подарка
   dragOffset.value = {
     x: clientX - gift.x,
     y: clientY - gift.y,
@@ -449,7 +465,7 @@ onUnmounted(() => {
     url('@/assets/images/game/play.png'),
     radial-gradient(50% 50% at 50% 50%, #01978b 0%, #006e65 100%);
   background-size: cover;
-  background-position: top center;
+  background-position: bottom;
   background-repeat: no-repeat;
 }
 
