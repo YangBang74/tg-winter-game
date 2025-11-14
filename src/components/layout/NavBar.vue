@@ -31,7 +31,8 @@ const isActive = (name: string) => route.name === name
       <div v-if="index === 1" class="h-full w-[4.2rem]"></div>
     </template>
 
-    <div
+    <RouterLink
+      to="/game"
       class="absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center justify-center rounded-full"
       style="
         width: 4.3125rem;
@@ -40,6 +41,6 @@ const isActive = (name: string) => route.name === name
       "
     >
       <Icons name="logo" />
-    </div>
+    </RouterLink>
   </nav>
 </template>
