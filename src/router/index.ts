@@ -10,6 +10,7 @@ import RouletteView from '@/views/RouletteView.vue'
 import TasksView from '@/views/TasksView.vue'
 import CalendarView from '@/views/Calendar/CalendarView.vue'
 import CalendarDetailView from '@/views/Calendar/CalendarDetailView.vue'
+import LotteryView from '@/views/LotteryView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -63,6 +64,11 @@ const router = createRouter({
           name: 'calendar-detail',
           component: CalendarDetailView,
         },
+        {
+          path: 'lottery',
+          name: 'lottery',
+          component: LotteryView,
+        }
       ],
     },
   ],
