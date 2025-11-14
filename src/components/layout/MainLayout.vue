@@ -15,3 +15,13 @@ import Header from './Header.vue'
     </footer>
   </div>
 </template>
+<style scoped>
+.layout {
+  background:
+    url('@/assets/images/background.png'),
+    radial-gradient(50% 50% at 50% 50%, #01978b 0%, #006e65 100%);
+  background-size: cover;
+  background-position: top center;
+  background-repeat: no-repeat;
+}
+</style>
