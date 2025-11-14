@@ -67,11 +67,12 @@ const setVibration = (enabled: boolean) => {
     <Sheet v-model:open="isSettingsOpen">
       <template #trigger="{ open }">
         <button
-          class="rounded-full bg-[#023A35] p-2.5 z-100 text-white"
+          class="rounded-full bg-[#484C52] p-2.5 z-100 text-white flex items-center gap-2"
           type="button"
           @click="open"
         >
           <Icons name="setting" :size="20" />
+          <span class="text-sm font-medium">Настройки</span>
         </button>
       </template>
 
