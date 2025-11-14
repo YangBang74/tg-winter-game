@@ -32,7 +32,9 @@ const emit = defineEmits<{
 
 const itemWidth = computed(() => props.itemWidth ?? 0)
 const gap = computed(() => props.gap ?? 16)
-const spinDuration = computed(() => props.spinDuration ?? 3000)
+const DEFAULT_SPIN_DURATION = 6000
+
+const spinDuration = computed(() => props.spinDuration ?? DEFAULT_SPIN_DURATION)
 
 const isSpinning = ref(false)
 const internalIndex = ref(0)
@@ -119,8 +121,7 @@ const resolvePrizeIndex = async () => {
     }
 
     const data = await response.json().catch(() => null)
-    const rawPrizeId =
-      data?.prizeId ?? data?.prizeID ?? data?.['prize-id'] ?? data?.['prizeId'] ?? data?.id ?? null
+    const rawPrizeId = data?.['prize_id']
 
     if (typeof rawPrizeId === 'number') {
       const prizeIndex = props.items.findIndex((item) => Number(item.id) === Number(rawPrizeId))

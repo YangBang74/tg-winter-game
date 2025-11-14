@@ -38,8 +38,8 @@ const { t } = useI18n()
         {{ t('home.cta.lottery.titleLine2') }}
       </h3>
       <button class="bg-primary py-2.5 px-4 rounded-full flex items-center gap-2">
-        <Icons name="calendar" />
-        <span class="font-raleway font-bold">{{ t('home.cta.common.open') }}</span>
+        <Icons name="play" />
+        <span class="font-raleway font-bold">{{ t('home.cta.common.play') }}</span>
       </button>
     </RouterLink>
   </section>

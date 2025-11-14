@@ -8,6 +8,8 @@ import HomeView from '@/views/HomeView.vue'
 import RouletteDetailView from '@/views/RouletteDetailView.vue'
 import RouletteView from '@/views/RouletteView.vue'
 import TasksView from '@/views/TasksView.vue'
+import CalendarView from '@/views/Calendar/CalendarView.vue'
+import CalendarDetailView from '@/views/Calendar/CalendarDetailView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -50,6 +52,16 @@ const router = createRouter({
           path: 'roulette/:id',
           name: 'roulette-detail',
           component: RouletteDetailView,
+        },
+        {
+          path: 'calendar',
+          name: 'calendar',
+          component: CalendarView,
+        },
+        {
+          path: 'calendar/:id',
+          name: 'calendar-detail',
+          component: CalendarDetailView,
         },
       ],
     },
