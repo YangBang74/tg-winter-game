@@ -94,10 +94,10 @@ const boxPositions = computed(() => {
   const spacing = screenHeight / 5
 
   return {
-    red: { x: 0, y: spacing * 0.8, side: 'left' as const },
-    yellow: { x: window.innerWidth - 80, y: spacing * 0.8, side: 'right' as const },
-    blue: { x: 0, y: spacing * 2, side: 'left' as const },
-    violet: { x: window.innerWidth - 80, y: spacing * 2, side: 'right' as const },
+    red: { x: 0, y: spacing * 0.7, side: 'left' as const },
+    yellow: { x: window.innerWidth - 80, y: spacing * 0.7, side: 'right' as const },
+    blue: { x: 0, y: spacing * 1.8, side: 'left' as const },
+    violet: { x: window.innerWidth - 80, y: spacing * 1.8, side: 'right' as const },
   }
 })
 
