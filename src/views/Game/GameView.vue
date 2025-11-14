@@ -9,7 +9,7 @@ const startGame = () => {
 }
 </script>
 <template>
-  <div class="game-intro p-4 min-h-[calc(100vh-10rem)] flex flex-col justify-between mt-4">
+  <div class="game-intro p-4 pt-0 min-h-[calc(100vh-10rem)] flex flex-col justify-between mt-4">
     <div class="text-center max-w-[15rem] mx-auto space-y-1">
       <h1 class="text-[1.5rem] text-white font-bold uppercase">Задание</h1>
       <p class="text-center text-white">Распредели подарки свайпами в нужную трубу</p>
@@ -27,7 +27,7 @@ const startGame = () => {
 .game-intro {
   background-image: url('@/assets/images/game/game-intro.png');
   background-size: cover;
-  background-position: center;
+  background-position: 0 -100px;
   background-repeat: no-repeat;
 }
 </style>
