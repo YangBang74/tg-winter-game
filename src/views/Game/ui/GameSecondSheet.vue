@@ -67,7 +67,7 @@ const onWithdraw = () => {
               <Icons name="time" :size="20" class="text-blue-600" />
             </div>
             <div>
-              <p class="text-lg font-bold">{{ formattedTime }}</p>
+              <p class="text-lg font-bold">01:00</p>
               <p class="text-xs text-gray-500">Время</p>
             </div>
           </div>

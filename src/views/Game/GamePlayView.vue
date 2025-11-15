@@ -153,7 +153,7 @@ const animateGifts = (currentTime: number) => {
   const giftsToRemove: number[] = []
 
   gifts.value.forEach((gift) => {
-    if (!gift.caught && isGameActive.value) {
+    if (!gift.caught) {
       gift.y += fallSpeed * (deltaTime / 16.67)
 
       if (gift.y > screenHeight) {
@@ -168,7 +168,10 @@ const animateGifts = (currentTime: number) => {
           smokeEffects.value = smokeEffects.value.filter((s) => s.id !== smokeId)
         }, 3000)
 
-        failNumber.value++
+        // Увеличиваем счетчик ошибок только если игра активна
+        if (isGameActive.value) {
+          failNumber.value++
+        }
         giftsToRemove.push(gift.id)
 
         if (selectedGift.value?.id === gift.id) {
@@ -314,6 +317,20 @@ const onGiftMouseUp = () => {
   }
 }
 
+const releaseGift = () => {
+  if (selectedGift.value) {
+    selectedGift.value.caught = false
+    selectedGift.value.startTime =
+      Date.now() -
+      (selectedGift.value.y /
+        (window.innerHeight / difficultyConfig[difficulty.value].fallDuration)) *
+        1000
+    selectedGift.value = null
+    isDragging.value = false
+    hoveredBox.value = null
+  }
+}
+
 const onTimeEnd = () => {
   isGameActive.value = false
 
@@ -322,12 +339,18 @@ const onTimeEnd = () => {
     spawnTimeout = null
   }
 
+  // Отпускаем подарок перед показом sheet
+  releaseGift()
+
   gameTime.value = 60
   showFirstSheet.value = true
 }
 
 watch(showFirstSheet, (newValue) => {
-  if (!newValue) {
+  if (newValue) {
+    // Отпускаем подарок когда открывается первый sheet
+    releaseGift()
+  } else {
     setTimeout(() => {
       showSecondSheet.value = true
     }, 300)
@@ -335,7 +358,10 @@ watch(showFirstSheet, (newValue) => {
 })
 
 watch(showSecondSheet, (newValue) => {
-  if (!newValue) {
+  if (newValue) {
+    // Отпускаем подарок когда открывается второй sheet
+    releaseGift()
+  } else {
     setTimeout(() => {
       router.push({ name: 'game' })
     }, 300)
