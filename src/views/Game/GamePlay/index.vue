@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
-import GameHeader from './ui/GameHeader.vue'
-import GameResultsSheet from './ui/GameResultsSheet.vue'
-import GameSecondSheet from './ui/GameSecondSheet.vue'
+import GameHeader from '../ui/GameHeader.vue'
+import GameResultsSheet from '../ui/GameResultsSheet.vue'
+import GameSecondSheet from '../ui/GameSecondSheet.vue'
 import redGift from '@/assets/images/game/red.png'
 import yellowGift from '@/assets/images/game/yellow.png'
 import blueGift from '@/assets/images/game/blue.png'
@@ -153,7 +153,7 @@ const animateGifts = (currentTime: number) => {
   const giftsToRemove: number[] = []
 
   gifts.value.forEach((gift) => {
-    if (!gift.caught && isGameActive.value) {
+    if (!gift.caught) {
       gift.y += fallSpeed * (deltaTime / 16.67)
 
       if (gift.y > screenHeight) {
@@ -168,7 +168,9 @@ const animateGifts = (currentTime: number) => {
           smokeEffects.value = smokeEffects.value.filter((s) => s.id !== smokeId)
         }, 3000)
 
-        failNumber.value++
+        if (isGameActive.value) {
+          failNumber.value++
+        }
         giftsToRemove.push(gift.id)
 
         if (selectedGift.value?.id === gift.id) {
@@ -234,25 +236,20 @@ const onGiftMouseDown = (event: MouseEvent | TouchEvent, gift: Gift) => {
 
   const { x: clientX, y: clientY } = getEventCoordinates(event)
 
-  // Получаем реальные координаты элемента из DOM, чтобы избежать рассинхронизации
   const target = event.target as HTMLElement
   const giftElement = target.closest('.gift') as HTMLElement
   if (giftElement) {
     const rect = giftElement.getBoundingClientRect()
-    // Центр элемента (из-за transform: translate(-50%, -50%))
     const elementCenterX = rect.left + rect.width / 2
     const elementCenterY = rect.top + rect.height / 2
 
-    // Обновляем координаты подарка реальными координатами из DOM
     gift.x = elementCenterX
     gift.y = elementCenterY
   }
 
-  // Помечаем подарок как пойманный после синхронизации координат
   gift.caught = true
   selectedGift.value = gift
 
-  // Вычисляем offset относительно реальной позиции подарка
   dragOffset.value = {
     x: clientX - gift.x,
     y: clientY - gift.y,
@@ -314,6 +311,20 @@ const onGiftMouseUp = () => {
   }
 }
 
+const releaseGift = () => {
+  if (selectedGift.value) {
+    selectedGift.value.caught = false
+    selectedGift.value.startTime =
+      Date.now() -
+      (selectedGift.value.y /
+        (window.innerHeight / difficultyConfig[difficulty.value].fallDuration)) *
+        1000
+    selectedGift.value = null
+    isDragging.value = false
+    hoveredBox.value = null
+  }
+}
+
 const onTimeEnd = () => {
   isGameActive.value = false
 
@@ -322,12 +333,16 @@ const onTimeEnd = () => {
     spawnTimeout = null
   }
 
+  releaseGift()
+
   gameTime.value = 60
   showFirstSheet.value = true
 }
 
 watch(showFirstSheet, (newValue) => {
-  if (!newValue) {
+  if (newValue) {
+    releaseGift()
+  } else {
     setTimeout(() => {
       showSecondSheet.value = true
     }, 300)
@@ -335,7 +350,9 @@ watch(showFirstSheet, (newValue) => {
 })
 
 watch(showSecondSheet, (newValue) => {
-  if (!newValue) {
+  if (newValue) {
+    releaseGift()
+  } else {
     setTimeout(() => {
       router.push({ name: 'game' })
     }, 300)
@@ -367,6 +384,7 @@ onUnmounted(() => {
   window.removeEventListener('touchend', onGiftMouseUp)
 })
 </script>
+
 <template>
   <div class="game h-screen relative overflow-hidden">
     <GameHeader
@@ -377,7 +395,6 @@ onUnmounted(() => {
       @time-update="(seconds) => (gameTime = 60 - seconds)"
     />
 
-    <!-- Gift Boxes -->
     <div
       v-for="(pos, colorKey) in boxPositions"
       :key="colorKey"
@@ -395,7 +412,6 @@ onUnmounted(() => {
       />
     </div>
 
-    <!-- Falling Gifts -->
     <div
       v-for="gift in gifts"
       :key="gift.id"
@@ -414,7 +430,6 @@ onUnmounted(() => {
       <img :src="giftImages[gift.color]" alt="" class="w-16 h-16 pointer-events-none" />
     </div>
 
-    <!-- White Particle Effects -->
     <div
       v-for="effect in particleEffects"
       :key="effect.id"
@@ -431,7 +446,6 @@ onUnmounted(() => {
       <div class="particle"></div>
     </div>
 
-    <!-- Black Smoke Effects -->
     <div
       v-for="smoke in smokeEffects"
       :key="smoke.id"
@@ -443,14 +457,12 @@ onUnmounted(() => {
       <div class="smoke"></div>
     </div>
 
-    <!-- First Sheet -->
     <GameResultsSheet
       v-model:open="showFirstSheet"
       :check-number="checkNumber"
       :fail-number="failNumber"
     />
 
-    <!-- Second Sheet -->
     <GameSecondSheet
       v-model:open="showSecondSheet"
       :check-number="checkNumber"
@@ -459,6 +471,7 @@ onUnmounted(() => {
     />
   </div>
 </template>
+
 <style scoped>
 .game {
   background:
@@ -532,7 +545,6 @@ onUnmounted(() => {
   user-select: none;
 }
 
-/* White Particle Effect */
 .particle-effect {
   transform: translate(-50%, -50%);
 }
@@ -638,7 +650,6 @@ onUnmounted(() => {
   --dy: -40px;
 }
 
-/* Black Smoke Effect */
 .smoke-effect {
   bottom: 20%;
   transform: translateX(-50%);

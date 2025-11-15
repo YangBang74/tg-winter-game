@@ -8,6 +8,7 @@ const startGame = () => {
   router.push({ name: 'game-play' })
 }
 </script>
+
 <template>
   <div class="game-intro p-4 pt-0 min-h-[calc(100vh-9rem)] flex flex-col justify-between mt-4">
     <div class="text-center max-w-[15rem] mx-auto space-y-1">
@@ -16,13 +17,14 @@ const startGame = () => {
     </div>
     <button
       @click="startGame"
-      class="flex items-center relative  gap-2 justify-center bg-primary w-full font-bold rounded-full text-white px-4 py-2.5"
+      class="flex items-center relative gap-2 justify-center bg-primary w-full font-bold rounded-full text-white px-4 py-2.5"
     >
       <Icons name="play" />
       Запустить игру
     </button>
   </div>
 </template>
+
 <style scoped>
 .game-intro {
   background-image: url('@/assets/images/game/game-intro.png');
