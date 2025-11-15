@@ -4,6 +4,7 @@ import Icons from '@/components/shared/Icons.vue'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useCalendar, type CalendarDay, type Gift } from '@/composables/useCalendar'
+import CalendarDayCard from './ui/CalendarDayCard.vue'
 
 const route = useRoute()
 const calendarId = computed(() => String(route.params.id ?? 'free'))
@@ -61,41 +62,14 @@ onUnmounted(() => {
     </header>
 
     <section class="grid grid-cols-3 gap-3 md:gap-5">
-      <article
+      <CalendarDayCard
         v-for="day in days"
         :key="day.id"
-        class="relative overflow-hidden p-1.5 rounded-2xl transition-all duration-200 ease-in-out"
-        :class="{
-          'bg-[#A4DD9E]': isDayOpened(day.id),
-          'bg-[#FFFFFF]/70': !isDayOpened(day.id),
-          'hover:-translate-y-1 cursor-pointer': day.status === 'available' && !isDayOpened(day.id),
-          'opacity-40 cursor-default': day.status === 'locked',
-          'cursor-pointer': day.status === 'scheduled' || isDayOpened(day.id),
-        }"
+        :day="day"
+        :is-opened="isDayOpened(day.id)"
+        :day-info="getDayInfo(day)"
         @click="openDay(day)"
-      >
-        <img
-          :src="day.image"
-          :alt="`Day ${day.title}`"
-          class="relative inset-0 w-full aspect-square object-cover saturate-110"
-        />
-
-        <div class="relative flex flex-col justify-between h-full py-2 backdrop-blur-sm">
-          <div class="flex justify-start items-center">
-            <button
-              class="w-full py-2 rounded-full font-bold text-xs flex items-center justify-center gap-1.5"
-              :class="{
-                'bg-[#FFFFFF]/30 text-white': isDayOpened(day.id),
-                'bg-primary text-white': !isDayOpened(day.id),
-              }"
-              type="button"
-            >
-              <Icons v-if="isDayOpened(day.id)" name="check" :size="14" class="text-white" />
-              <span v-if="!isDayOpened(day.id)">{{ getDayInfo(day) }}</span>
-            </button>
-          </div>
-        </div>
-      </article>
+      />
     </section>
 
     <AppDialog v-model:open="isDialogOpen" @close="closeDialog" class="px-2">
@@ -121,3 +95,4 @@ onUnmounted(() => {
     </AppDialog>
   </div>
 </template>
+

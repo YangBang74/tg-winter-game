@@ -30,6 +30,14 @@ interface PaymentMethod {
   minAmount: string
 }
 
+interface Transaction {
+  id: string
+  type: 'deposit' | 'withdraw' | 'reward'
+  title: string
+  date: string
+  amount: string
+}
+
 const coins: Coin[] = [
   {
     name: 'Snow',
@@ -120,18 +128,110 @@ const amount = ref('')
 const depositAddress = ref('0x5b2C82a36367032c4A7BDDCA14058625..')
 const memo = ref('')
 
+const depositTransactions = ref<Transaction[]>([
+  {
+    id: '1',
+    type: 'withdraw',
+    title: 'Вывод баланса',
+    date: '12.12.2025',
+    amount: '-0.123123',
+  },
+  {
+    id: '2',
+    type: 'deposit',
+    title: 'Депозит',
+    date: '12.12.2025',
+    amount: '+100',
+  },
+  {
+    id: '3',
+    type: 'reward',
+    title: 'Награда',
+    date: '12.12.2025',
+    amount: '+1',
+  },
+])
+
+const withdrawTransactions = ref<Transaction[]>([])
+
+const parseColorWithOpacity = (colorWithOpacity: string): string => {
+  const [color, opacity] = colorWithOpacity.split('/')
+  if (!opacity || !color) return color || '#000000'
+
+  const hex = color.replace('#', '')
+  const r = parseInt(hex.substring(0, 2), 16)
+  const g = parseInt(hex.substring(2, 4), 16)
+  const b = parseInt(hex.substring(4, 6), 16)
+  const alpha = parseInt(opacity) / 100
+
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`
+}
+
+const getTransactionStyle = (type: Transaction['type']) => {
+  const styles = {
+    withdraw: {
+      iconColor: '#A4DD9E',
+      iconBg: '#A4DD9E/20',
+      iconName: 'check',
+    },
+    deposit: {
+      iconColor: '#0095EF',
+      iconBg: '#0095EF/20',
+      iconName: 'deposit',
+    },
+    reward: {
+      iconColor: '#F67F2A',
+      iconBg: '#F67F2A/20',
+      iconName: 'gift',
+    },
+  }
+
+  return styles[type] || styles.withdraw
+}
+
 const activeTab = computed(() => {
   return balanceTabs.value.find((tab) => tab.isActive)?.id || 'deposit'
 })
 
-const currentMinAmount = computed(() => {
-  const method = paymentMethods.find((m) => m.id === selectedPaymentMethod.value)
-  return method?.minAmount || '0.01'
+const currentTransactions = computed(() => {
+  const transactions =
+    activeTab.value === 'deposit' ? depositTransactions.value : withdrawTransactions.value
+  return transactions.map((transaction) => ({
+    ...transaction,
+    style: getTransactionStyle(transaction.type),
+  }))
 })
 
-const currentMethodName = computed(() => {
-  const method = paymentMethods.find((m) => m.id === selectedPaymentMethod.value)
-  return method?.name || 'TON'
+const currentPaymentMethod = computed(() => {
+  return paymentMethods.find((m) => m.id === selectedPaymentMethod.value) ?? paymentMethods[0]
+})
+
+const currentMinAmount = computed(() => currentPaymentMethod.value?.minAmount ?? '0.01')
+
+const currentMethodName = computed(() => currentPaymentMethod.value?.name ?? 'TON')
+
+const isTonSelected = computed(() => selectedPaymentMethod.value === 'ton')
+
+const isTelegramStarsSelected = computed(() => selectedPaymentMethod.value === 'telegram-stars')
+
+const isCryptoSelected = computed(() => !isTonSelected.value && !isTelegramStarsSelected.value)
+
+const receivedTon = computed(() => {
+  const starsAmount = parseFloat(amount.value) || 0
+  const exchangeRate = 1000
+  return (starsAmount / exchangeRate).toFixed(4)
+})
+
+const cryptoNetworks = computed(() => {
+  const networks: Record<string, string> = {
+    usdt: 'BEP20, ETH, POLYGON',
+    bnb: 'BEP20, ETH, POLYGON',
+    eth: 'ETH, POLYGON',
+    solana: 'SOL',
+    tron: 'TRC20',
+    litecoin: 'LTC',
+  }
+  return networks[selectedPaymentMethod.value] || 'BEP20, ETH, POLYGON'
 })
 
 const switchTab = (tabId: string) => {
@@ -147,14 +247,12 @@ const selectPaymentMethod = (methodId: string) => {
 const copyAddress = async () => {
   try {
     await navigator.clipboard.writeText(depositAddress.value)
-    // Можно добавить уведомление об успешном копировании
   } catch (err) {
     console.error('Failed to copy:', err)
   }
 }
 
 const handleDeposit = () => {
-  // Логика пополнения баланса
   console.log('Deposit:', {
     method: selectedPaymentMethod.value,
     amount: amount.value,
@@ -164,16 +262,12 @@ const handleDeposit = () => {
 }
 
 const getCoinBgColor = (coinName: string): string => {
-  switch (coinName.toLowerCase()) {
-    case 'snow':
-      return '#A79EFF'
-    case 'ton':
-      return '#0095EF'
-    case 'stars':
-      return '#EB8700'
-    default:
-      return '#01978b'
+  const colors: Record<string, string> = {
+    snow: '#A79EFF',
+    ton: '#0095EF',
+    stars: '#EB8700',
   }
+  return colors[coinName.toLowerCase()] || '#01978b'
 }
 </script>
 
@@ -192,13 +286,9 @@ const getCoinBgColor = (coinName: string): string => {
         <Icons :name="coin.icon" :size="16" />
         <p class="font-bold text-[0.8125rem] uppercase">{{ coin.name }}</p>
       </div>
-      <div class="">
-        <p class="text-lg font-bold">
-          {{ coin.amount }}
-        </p>
-        <p class="text-xs text-white/70 font-medium">
-          {{ coin.usd }}
-        </p>
+      <div>
+        <p class="text-lg font-bold">{{ coin.amount }}</p>
+        <p class="text-xs text-white/70 font-medium">{{ coin.usd }}</p>
       </div>
     </div>
 
@@ -214,14 +304,12 @@ const getCoinBgColor = (coinName: string): string => {
       </div>
     </div>
 
-    <!-- Блок пополнения -->
     <div
       v-if="activeTab === 'deposit'"
       class="space-y-2.5 bg-white text-[#484C52] rounded-2xl p-2.5"
     >
       <h2 class="text-lg text-center font-bold">Пополнить баланс</h2>
 
-      <!-- Выбор способа оплаты -->
       <div class="space-y-2">
         <p class="text-xs font-medium text-black">Выберите способ</p>
         <div class="grid grid-cols-3 gap-2">
@@ -229,73 +317,172 @@ const getCoinBgColor = (coinName: string): string => {
             v-for="method in paymentMethods"
             :key="method.id"
             class="rounded-xl p-2.5 flex flex-col items-center gap-1.5 transition-all"
-            :class="selectedPaymentMethod === method.id ? 'bg-[#0095EF]' : 'bg-white/70'"
+            :class="selectedPaymentMethod === method.id ? 'bg-[#0095EF]' : 'bg-[#F7F7F7]'"
             @click="selectPaymentMethod(method.id)"
           >
             <img :src="method.icon" :alt="method.name" class="w-6 h-6" />
-            <p class="text-xs font-medium text-center">{{ method.name }}</p>
-            <p class="text-[0.625rem] text-white/70">от {{ method.minAmount }}</p>
+            <p
+              class="text-xs font-medium text-center"
+              :class="selectedPaymentMethod === method.id ? 'text-white' : 'text-black'"
+            >
+              {{ method.name }}
+            </p>
+            <p
+              class="text-[0.625rem]"
+              :class="selectedPaymentMethod === method.id ? 'text-white/50' : 'text-black/50'"
+            >
+              от {{ method.minAmount }}
+            </p>
           </button>
         </div>
       </div>
 
-      <!-- Количество -->
-      <div class="space-y-2">
-        <label class="text-sm font-medium text-white/80">Количество</label>
-        <input
-          v-model="amount"
-          type="number"
-          placeholder="Введите количество"
-          class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder:text-white/50 focus:outline-none focus:border-[#0095EF]"
-        />
-      </div>
-
-      <!-- Адрес пополнения -->
-      <div class="space-y-2">
-        <label class="text-sm font-medium text-white/80">Адрес пополнения</label>
-        <div class="flex items-center gap-2">
+      <div v-if="isTonSelected" class="space-y-2.5">
+        <div class="space-y-2">
+          <label class="text-xs font-medium text-black">Количество</label>
           <input
-            v-model="depositAddress"
-            type="text"
-            readonly
-            class="flex-1 bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder:text-white/50 focus:outline-none focus:border-[#0095EF]"
+            v-model="amount"
+            type="number"
+            placeholder="Введите количество"
+            class="w-full bg-white/10 border border-[#484C52]/10 rounded-full px-4 py-3 focus:outline-none"
           />
-          <button
-            @click="copyAddress"
-            class="bg-white/10 border border-white/20 rounded-xl p-3 hover:bg-white/20 transition-colors"
-          >
-            <Icons name="copy" :size="20" class="text-white" />
-          </button>
         </div>
+
+        <div class="space-y-2">
+          <label class="text-xs font-medium text-black">Адрес пополнения</label>
+          <div class="flex items-center relative gap-2">
+            <input
+              v-model="depositAddress"
+              type="text"
+              readonly
+              class="w-full pr-12 truncate bg-white/10 border border-[#484C52]/10 rounded-full px-4 py-3 focus:outline-none"
+            />
+            <button @click="copyAddress" class="absolute right-1 p-3">
+              <Icons name="copy" :size="20" class="text-white" />
+            </button>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <label class="text-xs font-medium text-black">Комментарий к переводу</label>
+          <input
+            v-model="memo"
+            type="text"
+            placeholder="Введите МЕМО"
+            class="w-full bg-white/10 border border-[#484C52]/10 rounded-full px-4 py-3 focus:outline-none"
+          />
+        </div>
+
+        <button
+          @click="handleDeposit"
+          class="w-full bg-[#0095EF] rounded-full py-3 px-4 flex items-center justify-center gap-2.5 hover:bg-[#0085DF] transition-colors"
+        >
+          <Icons name="wallet" :size="20" class="text-white" />
+          <span class="font-bold text-white">Пополнить баланс</span>
+        </button>
+
+        <p class="text-xs text-[#484C52]/70">
+          Мин. сумма для ввода -
+          <span class="text-[#0095EF]">{{ currentMinAmount }} {{ currentMethodName }}</span>
+        </p>
       </div>
 
-      <!-- Комментарий к переводу -->
-      <div class="space-y-2">
-        <label class="text-sm font-medium text-white/80">Комментарий к переводу</label>
-        <input
-          v-model="memo"
-          type="text"
-          placeholder="Введите МЕМО"
-          class="w-full bg-white/10 border border-white/20 rounded-xl px-4 py-3 text-white placeholder:text-white/50 focus:outline-none focus:border-[#0095EF]"
-        />
+      <div v-if="isTelegramStarsSelected" class="space-y-2.5">
+        <h2 class="text-xs font-medium text-black">TON за звёзды</h2>
+
+        <div class="space-y-2">
+          <input
+            v-model="amount"
+            type="number"
+            placeholder="Введите количество"
+            class="w-full bg-white border border-[#484C52]/10 rounded-full px-4 py-3 text-black placeholder:text-[#484C52]/50 focus:outline-none"
+          />
+        </div>
+
+        <button
+          @click="handleDeposit"
+          class="w-full bg-[#0095EF] rounded-full py-3 px-4 flex items-center justify-center gap-2.5 hover:bg-[#0085DF] transition-colors"
+        >
+          <Icons name="star" :size="20" class="text-white" />
+          <span class="text-sm font-bold text-white">Купить TON за звёзды</span>
+        </button>
+
+        <p class="text-xs text-[#484C52]/70">
+          Вы получите -
+          <span class="text-[#0095EF]">{{ receivedTon }} TON</span>
+        </p>
       </div>
 
-      <!-- Кнопка пополнения -->
-      <button
-        @click="handleDeposit"
-        class="w-full bg-[#0095EF] rounded-full py-3 px-4 flex items-center justify-center gap-2.5 hover:bg-[#0085DF] transition-colors"
-      >
-        <Icons name="wallet" :size="20" class="text-white" />
-        <span class="font-bold text-white">Пополнить баланс</span>
-      </button>
+      <div v-if="isCryptoSelected" class="space-y-2.5">
+        <p class="text-xs font-medium text-black">{{ cryptoNetworks }}</p>
 
-      <!-- Минимальная сумма -->
-      <p class="text-xs text-white/70 text-center">
-        Мин. сумма для ввода - {{ currentMinAmount }} {{ currentMethodName }}
-      </p>
+        <div class="space-y-2">
+          <div class="flex items-center relative gap-2">
+            <input
+              v-model="depositAddress"
+              type="text"
+              readonly
+              class="w-full pr-12 truncate bg-[#F7F7F7] border border-[#484C52]/10 rounded-full px-4 py-3 text-black focus:outline-none"
+            />
+            <button @click="copyAddress" class="absolute right-1 p-3">
+              <Icons name="copy" :size="20" class="text-[#484C52]" />
+            </button>
+          </div>
+        </div>
+
+        <p class="text-xs text-[#484C52]/70">
+          Минимальный депозит -
+          <span class="text-[#0095EF]">{{ currentMinAmount }} {{ currentMethodName }}</span>
+        </p>
+
+        <p class="text-xs text-[#484C52]">
+          * Все переведённые токены будут конвертированы в TON по актуальному курсу.
+        </p>
+      </div>
+    </div>
+
+    <div
+      v-if="activeTab === 'deposit' || activeTab === 'withdraw'"
+      class="bg-white text-[#484C52] rounded-2xl p-4"
+    >
+      <h2 class="text-lg font-bold text-center mb-4">История транзакций</h2>
+
+      <div v-if="currentTransactions.length > 0" class="space-y-3">
+        <template v-for="transaction in currentTransactions" :key="transaction.id">
+          <div class="flex items-center gap-3">
+            <div
+              class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
+              :style="{ backgroundColor: parseColorWithOpacity(transaction.style.iconBg) }"
+            >
+              <Icons
+                :name="transaction.style.iconName"
+                :size="20"
+                :style="{ color: transaction.style.iconColor }"
+              />
+            </div>
+
+            <div class="flex-1 min-w-0">
+              <p class="text-sm font-medium text-black">{{ transaction.title }}</p>
+              <p class="text-xs text-[#484C52]/70">{{ transaction.date }}</p>
+            </div>
+
+            <div
+              class="bg-[#0095EF] flex items-center text-white justify-center gap-1 rounded-full px-3 py-1 shrink-0"
+            >
+              <Icons name="ton" :size="16" />
+              <p class="text-xs font-medium">{{ transaction.amount }}</p>
+            </div>
+          </div>
+        </template>
+      </div>
+
+      <div v-else class="text-center py-4">
+        <p class="text-xs text-[#484C52]">На данный момент нет истории транзакций</p>
+      </div>
     </div>
   </section>
 </template>
+
 <style scoped>
 .coin-block {
   background: url('@/assets/images/balance/coin-block.png') no-repeat right center;
