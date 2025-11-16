@@ -57,7 +57,7 @@ onBeforeUnmount(() => {
           />
 
           <div
-            class="relative mt-auto rounded-t-3xl bg-white p-6 pb-8 text-black shadow-lg shadow-black/30"
+            class="relative mt-auto rounded-t-3xl bg-white p-3 text-black shadow-lg shadow-black/30"
             @click.stop
           >
             <button
