@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import Icons from '@/components/shared/Icons.vue'
 import PaymentMethodSelector from './PaymentMethodSelector.vue'
 import { PAYMENT_METHODS } from '../model/constants'
@@ -30,8 +30,18 @@ interface Emits {
 const props = defineProps<Props>()
 const emit = defineEmits<Emits>()
 
+const isCopied = ref(false)
+
 const handleSelectMethod = (methodId: string) => {
   emit('update:selectedPaymentMethod', methodId)
+}
+
+const handleCopy = () => {
+  emit('copy-address')
+  isCopied.value = true
+  setTimeout(() => {
+    isCopied.value = false
+  }, 3000)
 }
 
 const handleAmountUpdate = (event: Event) => {
@@ -82,8 +92,8 @@ const handleMemoUpdate = (event: Event) => {
             class="w-full pr-12 truncate bg-white/10 border border-[#484C52]/10 rounded-full px-4 py-3 focus:outline-none"
             @input="handleAddressUpdate"
           />
-          <button @click="emit('copy-address')" class="absolute right-1 p-3">
-            <Icons name="copy" :size="20" class="text-white" />
+          <button @click="handleCopy" class="absolute right-1 p-3">
+            <Icons :name="isCopied ? 'check' : 'copy'" :size="isCopied ? 16 : 20" class="text-white" />
           </button>
         </div>
       </div>
@@ -152,8 +162,8 @@ const handleMemoUpdate = (event: Event) => {
             class="w-full pr-12 truncate bg-[#F7F7F7] border border-[#484C52]/10 rounded-full px-4 py-3 text-black focus:outline-none"
             @input="handleAddressUpdate"
           />
-          <button @click="emit('copy-address')" class="absolute right-1 p-3">
-            <Icons name="copy" :size="20" class="text-[#484C52]" />
+          <button @click="handleCopy" class="absolute right-1 p-3">
+            <Icons :name="isCopied ? 'check' : 'copy'" :size="isCopied ? 16 : 20" class="text-[#484C52]" />
           </button>
         </div>
       </div>

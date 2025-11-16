@@ -17,7 +17,7 @@ const isActive = (name: string) => route.name === name
 
 <template>
   <nav
-    class="fixed bottom-0 left-0 right-0 flex items-end justify-between rounded-t-[1.125rem] bg-[#023A35] px-4 pb-4 pt-2"
+    class="fixed bottom-0 left-0 right-0 flex items-end justify-between rounded-t-[1.125rem] bg-[#023A35] px-4 pb-6 pt-2"
   >
     <template v-for="(item, index) in navItems" :key="item.name">
       <RouterLink
@@ -33,7 +33,7 @@ const isActive = (name: string) => route.name === name
 
     <RouterLink
       to="/game"
-      class="absolute bottom-3 left-1/2 flex -translate-x-1/2 items-center justify-center rounded-full"
+      class="absolute bottom-5 left-1/2 flex -translate-x-1/2 items-center justify-center rounded-full"
       style="
         width: 4.3125rem;
         height: 4.4375rem;

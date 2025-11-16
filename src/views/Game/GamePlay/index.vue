@@ -3,7 +3,6 @@ import { ref, onMounted, onUnmounted, computed, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import GameHeader from '../ui/GameHeader.vue'
 import GameResultsSheet from '../ui/GameResultsSheet.vue'
-import GameSecondSheet from '../ui/GameSecondSheet.vue'
 import redGift from '@/assets/images/game/red.png'
 import yellowGift from '@/assets/images/game/yellow.png'
 import blueGift from '@/assets/images/game/blue.png'
@@ -50,7 +49,6 @@ const dragOffset = ref({ x: 0, y: 0 })
 const hoveredBox = ref<GiftColor | null>(null)
 const isGameActive = ref(true)
 const showFirstSheet = ref(false)
-const showSecondSheet = ref(false)
 const gameTime = ref(60)
 
 let giftIdCounter = 0
@@ -344,16 +342,6 @@ watch(showFirstSheet, (newValue) => {
     releaseGift()
   } else {
     setTimeout(() => {
-      showSecondSheet.value = true
-    }, 300)
-  }
-})
-
-watch(showSecondSheet, (newValue) => {
-  if (newValue) {
-    releaseGift()
-  } else {
-    setTimeout(() => {
       router.push({ name: 'game' })
     }, 300)
   }
@@ -388,7 +376,7 @@ onUnmounted(() => {
 <template>
   <div class="game h-screen relative overflow-hidden">
     <GameHeader
-      :time="60"
+      :time="10"
       :fail-number="failNumber"
       :check-number="checkNumber"
       @time-end="onTimeEnd"
@@ -461,13 +449,6 @@ onUnmounted(() => {
       v-model:open="showFirstSheet"
       :check-number="checkNumber"
       :fail-number="failNumber"
-    />
-
-    <GameSecondSheet
-      v-model:open="showSecondSheet"
-      :check-number="checkNumber"
-      :fail-number="failNumber"
-      :time="60 - gameTime"
     />
   </div>
 </template>

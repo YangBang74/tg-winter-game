@@ -50,14 +50,14 @@ onBeforeUnmount(() => {
       <Transition name="sheet">
         <div v-if="isOpen" class="sheet fixed inset-0 z-50 flex flex-col">
           <button
-            class="absolute inset-0 bg-black/50"
+            class="absolute inset-0 bg-black/70"
             type="button"
             aria-label="Закрыть"
             @click="close"
           />
 
           <div
-            class="relative mt-auto rounded-t-3xl bg-white p-6 pb-8 text-black shadow-lg shadow-black/30"
+            class="relative mt-auto rounded-t-3xl bg-white p-3 text-black shadow-lg shadow-black/30"
             @click.stop
           >
             <button
