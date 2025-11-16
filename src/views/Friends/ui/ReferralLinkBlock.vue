@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import Icons from '@/components/shared/Icons.vue'
 
 interface Emits {
@@ -6,7 +7,17 @@ interface Emits {
   (e: 'invite'): void
 }
 
-defineEmits<Emits>()
+const emit = defineEmits<Emits>()
+
+const isCopied = ref(false)
+
+const handleCopy = () => {
+  emit('copy-link')
+  isCopied.value = true
+  setTimeout(() => {
+    isCopied.value = false
+  }, 3000)
+}
 </script>
 
 <template>
@@ -17,8 +28,8 @@ defineEmits<Emits>()
       class="bg-[#8981DD] my-2 rounded-full w-full gap-2.5 py-2 flex items-center justify-between px-2.5"
     >
       <p>https://t.me...ym64k4d84bbl</p>
-      <button @click="$emit('copy-link')">
-        <Icons name="copy" :size="20" />
+      <button @click="handleCopy">
+        <Icons :name="isCopied ? 'check' : 'copy'" :size="isCopied ? 16 : 20" />
       </button>
     </div>
     <button
@@ -39,4 +50,3 @@ defineEmits<Emits>()
   background-repeat: no-repeat;
 }
 </style>
-
