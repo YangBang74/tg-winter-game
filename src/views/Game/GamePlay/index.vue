@@ -376,7 +376,7 @@ onUnmounted(() => {
 <template>
   <div class="game h-screen relative overflow-hidden">
     <GameHeader
-      :time="10"
+      :time="60"
       :fail-number="failNumber"
       :check-number="checkNumber"
       @time-end="onTimeEnd"
