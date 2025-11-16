@@ -36,7 +36,6 @@ const handleClaim = () => {
       <div class="text-[#484C52] space-y-4">
         <h2 class="text-xl text-center font-bold">Результаты игры</h2>
 
-        <!-- Referral Statistics -->
         <div class="grid grid-cols-2 gap-2.5">
           <div class="bg-[#F7F7F7] rounded-lg py-3 px-4 flex flex-col items-start gap-1">
             <div class="flex items-center gap-1">
@@ -54,13 +53,11 @@ const handleClaim = () => {
             <p class="text-xs text-[#484C52]/50">Активных рефералов</p>
           </div>
         </div>
-        <!-- Game Results Cards -->
         <div class="grid grid-cols-2 gap-2.5">
           <div
             class="flex flex-col gap-2 items-center justify-center bg-cover bg-center bg-no-repeat py-4 px-4 rounded-xl relative overflow-hidden"
             :style="{ backgroundImage: `url(${success})` }"
           >
-            <!-- Festive lights decoration -->
             <div
               class="flex items-center gap-2 mt-2 py-px px-1 bg-white/50 min-w-16 justify-center rounded-full"
             >
@@ -73,7 +70,6 @@ const handleClaim = () => {
             class="flex flex-col gap-2 items-center justify-center bg-cover bg-center bg-no-repeat py-4 px-4 rounded-xl relative overflow-hidden"
             :style="{ backgroundImage: `url(${fail})` }"
           >
-            <!-- Festive lights decoration -->
             <div
               class="flex items-center gap-2 mt-2 py-px px-1 bg-white/50 min-w-16 justify-center rounded-full"
             >

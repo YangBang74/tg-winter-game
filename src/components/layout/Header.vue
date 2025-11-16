@@ -77,7 +77,7 @@ const setVibration = (enabled: boolean) => {
       </template>
 
       <template #default>
-        <div class="space-y-2.5 pt-8 font-raleway text-[#484C52]">
+        <div class="space-y-2.5 pt-10 font-raleway text-[#484C52]">
           <div class="flex items-center justify-between gap-2.5 rounded-xl bg-[#F5F5F5] p-1.5">
             <button
               class="flex w-full items-center justify-center gap-2.5 rounded-full bg-[#A79EFF] py-3.5 text-white"
