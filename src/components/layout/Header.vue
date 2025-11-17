@@ -80,13 +80,13 @@ const setVibration = (enabled: boolean) => {
         <div class="space-y-2.5 pt-10 font-raleway text-[#484C52]">
           <div class="flex items-center justify-between gap-2.5 rounded-xl bg-[#F5F5F5] p-1.5">
             <button
-              class="flex w-full items-center justify-center gap-2.5 rounded-full bg-[#A79EFF] py-3.5 text-white"
+              class="flex w-full items-center justify-center gap-2.5 rounded-full bg-[#A79EFF] py-2 text-white"
             >
               <Icons name="down-arrow" />
               <span class="font-raleway font-bold">{{ t('settings.actions.deposit') }}</span>
             </button>
             <button
-              class="flex w-full items-center justify-center gap-2.5 rounded-full border border-[#E4E4E4] bg-white py-3.5 text-black"
+              class="flex w-full items-center justify-center gap-2.5 rounded-full border border-[#E4E4E4] bg-white py-2 text-[#484C52]"
             >
               <span class="font-raleway font-bold">{{ t('settings.actions.withdraw') }}</span>
               <Icons name="up-arrow" />
@@ -109,7 +109,7 @@ const setVibration = (enabled: boolean) => {
                 "
                 @click="selectLanguage(language.id)"
               >
-                <img :src="language.image" :alt="language.label" class="h-5 w-5 rounded-full" />
+                <img :src="language.image" :alt="language.label" class="h-5 aspect-[4/3] rounded-sm" />
                 {{ language.label }}
               </button>
             </div>

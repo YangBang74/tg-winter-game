@@ -27,8 +27,8 @@ const handleClick = () => {
       class="relative overflow-hidden w-full p-1.5 rounded-2xl transition-all duration-200 ease-in-out"
       :class="{
         'bg-[#A4DD9E]': isOpened,
-        'bg-[#FFFFFF]/70': !isOpened && day.status === 'available',
-        'opacity-40 cursor-default': day.status === 'locked',
+        'bg-[#F5F5F5]': !isOpened && day.status === 'available',
+        'bg-[#E4E4E4] opacity-40 cursor-default': day.status === 'locked',
         'hover:-translate-y-1 cursor-pointer': day.status === 'available' && !isOpened,
         'cursor-pointer': isOpened,
       }"
@@ -49,7 +49,7 @@ const handleClick = () => {
       <button
         class="inline-flex items-center justify-center bg-white/30 w-full py-[0.3125rem] rounded-full mt-2.5"
       >
-        <Icons v-if="isOpened" name="check" :size="16" class="text-black" />
+        <Icons v-if="isOpened" name="check" :size="16" class="text-white" />
         <p v-if="!isOpened" class="mt-1 text-xs font-medium text-black">День {{ day.day }}</p>
       </button>
     </article>

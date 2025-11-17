@@ -93,7 +93,7 @@ const handleMemoUpdate = (event: Event) => {
             @input="handleAddressUpdate"
           />
           <button @click="handleCopy" class="absolute right-1 p-3">
-            <Icons :name="isCopied ? 'check' : 'copy'" :size="isCopied ? 16 : 20" class="text-white" />
+            <Icons :name="isCopied ? 'check' : 'copy'" :size="isCopied ? 16 : 20" class="text-[#484C52]" />
           </button>
         </div>
       </div>

@@ -53,7 +53,7 @@ watch(
 
     <template #default>
       <div class="space-y-4 text-[#484C52]">
-        <div class="relative mt-5">
+        <div class="relative mt-10">
           <h2 class="text-center text-xl font-bold uppercase">ЕЖЕДНЕВНАЯ НАГРАДА ЗА ВХОД</h2>
           <p class="mt-2 text-center text-sm text-[#484C52]/70">
             Не забывайте забирать награду каждый день, иначе прогресс будет сброшен.

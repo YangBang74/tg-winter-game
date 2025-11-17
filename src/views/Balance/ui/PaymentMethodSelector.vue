@@ -25,19 +25,19 @@ const handleSelect = (methodId: string) => {
       <button
         v-for="method in methods"
         :key="method.id"
-        class="rounded-xl p-2.5 flex flex-col items-center gap-1.5 transition-all"
-        :class="selectedId === method.id ? 'bg-[#0095EF]' : 'bg-[#F7F7F7]'"
+        class="rounded-xl pt-[5px] pb-2.5 flex flex-col items-center  transition-all"
+        :class="selectedId === method.id ? 'bg-[#0095EF]' : 'bg-[#F5F5F5]'"
         @click="handleSelect(method.id)"
       >
-        <img :src="method.icon" :alt="method.name" class="w-6 h-6" />
+        <img :src="method.icon" :alt="method.name" class="w-7.5 h-7.5 border-3 rounded-full" :class="selectedId === method.id ? 'border-white' : 'border-transparent'" />
         <p
-          class="text-xs font-medium text-center"
+          class="text-xs font-medium text-center leading-none pt-2.5"
           :class="selectedId === method.id ? 'text-white' : 'text-black'"
         >
           {{ method.name }}
         </p>
         <p
-          class="text-[0.625rem]"
+          class="text-[0.625rem] leading-none"
           :class="selectedId === method.id ? 'text-white/50' : 'text-black/50'"
         >
           от {{ method.minAmount }}
