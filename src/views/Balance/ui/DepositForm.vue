@@ -99,7 +99,8 @@ const handleMemoUpdate = (event: Event) => {
       </div>
 
       <div class="space-y-2">
-        <label class="text-xs font-medium text-black">Комментарий к переводу</label>
+        <label class="text-xs font-medium text-black">
+          Комментарий к переводу</label>
         <input
           :value="memo"
           type="text"
