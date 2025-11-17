@@ -11,19 +11,22 @@ defineProps<Props>()
 </script>
 
 <template>
-  <div class="bg-white text-[#484C52] rounded-2xl p-4">
+  <div class="bg-white text-[#484C52] rounded-2xl p-2.5">
     <h2 class="text-lg font-bold text-center mb-4">История транзакций</h2>
 
     <div v-if="transactions.length > 0" class="space-y-3">
-      <template v-for="transaction in transactions" :key="transaction.id">
-        <div class="flex items-center gap-3">
+      <template v-for="(transaction, index) in transactions" :key="transaction.id">
+        <div
+          class="flex items-center gap-2.5"
+          :class="{ 'border-b border-[#484C52]/10 pb-2.5': index !== transactions.length - 1 }"
+        >
           <div
-            class="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
+            class="w-8.5 h-8.5 rounded-lg flex items-center justify-center shrink-0"
             :style="{ backgroundColor: parseColorWithOpacity(transaction.style.iconBg) }"
           >
             <Icons
               :name="transaction.style.iconName"
-              :size="20"
+              :size="transaction.style.iconName === 'check' ? 14 : 20"
               :style="{ color: transaction.style.iconColor }"
             />
           </div>
@@ -34,10 +37,10 @@ defineProps<Props>()
           </div>
 
           <div
-            class="bg-[#0095EF] flex items-center text-white justify-center gap-1 rounded-full px-3 py-1 shrink-0"
+            class="bg-[#0095EF] flex items-center text-white justify-center gap-1 rounded-full px-2 py-1 shrink-0"
           >
-            <Icons name="ton" :size="16" />
-            <p class="text-xs font-medium">{{ transaction.amount }}</p>
+            <Icons name="ton" :size="12" />
+            <p class="text-[0.625rem] font-medium">{{ transaction.amount }}</p>
           </div>
         </div>
       </template>
@@ -48,4 +51,3 @@ defineProps<Props>()
     </div>
   </div>
 </template>
-

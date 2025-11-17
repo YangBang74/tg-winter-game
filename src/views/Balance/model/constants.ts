@@ -106,12 +106,12 @@ export const TRANSACTION_STYLES = {
   },
   deposit: {
     iconColor: '#0095EF',
-    iconBg: '#0095EF/20',
+    iconBg: '#0095EF/10',
     iconName: 'deposit',
   },
   reward: {
     iconColor: '#F67F2A',
-    iconBg: '#F67F2A/20',
+    iconBg: '#F67F2A/10',
     iconName: 'gift',
   },
 } as const

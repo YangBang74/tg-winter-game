@@ -396,7 +396,7 @@ onUnmounted(() => {
       <img
         :src="boxImages[colorKey as GiftColor]"
         alt=""
-        class="w-20 h-20 transition-transform hover:scale-110"
+        class="w-20 h-26 transition-transform hover:scale-110"
       />
     </div>
 
@@ -415,7 +415,7 @@ onUnmounted(() => {
       @mousedown="(e) => onGiftMouseDown(e, gift)"
       @touchstart="(e) => onGiftMouseDown(e, gift)"
     >
-      <img :src="giftImages[gift.color]" alt="" class="w-16 h-16 pointer-events-none" />
+      <img :src="giftImages[gift.color]" alt="" class="w-20 h-20 pointer-events-none" />
     </div>
 
     <div
