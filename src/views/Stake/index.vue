@@ -3,7 +3,7 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import { Icons } from '@/components/shared'
 
 const coinsStyle =
-  'text-brand-accent gap-px inline-flex items-center rounded-full text-sm bg-primary p-[0.3125rem]'
+  'font-bold gap-px inline-flex items-center rounded-full text-sm bg-primary p-[0.3125rem]'
 
 const tonBalance = ref(0)
 const starsBalance = ref(0)
