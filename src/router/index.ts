@@ -13,6 +13,7 @@ import CalendarDetailView from '@/views/Calendar/CalendarDetail/index.vue'
 import LotteryView from '@/views/Lottery/index.vue'
 import GameView from '@/views/Game/index.vue'
 import GamePlayView from '@/views/Game/GamePlay/index.vue'
+import StakeView from '@/views/Stake/index.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -75,6 +76,11 @@ const router = createRouter({
           path: 'game',
           name: 'game',
           component: GameView,
+        },
+        {
+          path: 'stake',
+          name: 'stake',
+          component: StakeView,
         },
       ],
     },
