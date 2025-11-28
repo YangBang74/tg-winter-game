@@ -67,7 +67,7 @@ const handleWithdraw = () => {
     class="game-intro relative overflow-hidden -bottom-2 p-4 pt-0 h-[calc(100vh-9rem)] flex flex-col items-center justify-start gap-2.5 mt-4"
   >
     <div class="flex-1 w-full space-y-2.5">
-      <div class="main-block relative rounded-2xl text-center px-2.5 pt-4 pb-10 w-full">
+      <div class="main-block relative rounded-2xl text-center px-4 pt-4 pb-10 w-full">
         <h1 class="text-[1.25rem] leading-7.5 text-white font-bold uppercase mb-4">
           Получайте до 1% наград <br />
           в
@@ -77,7 +77,7 @@ const handleWithdraw = () => {
           </span>
           или
           <span :class="[coinsStyle, '!bg-[#FFA32F]', 'text-[#484C52]']">
-            <Icons name="star-circle" :size="14" class="mr-0.5"/>
+            <Icons name="star-circle" :size="14" class="mr-0.5" />
             STARS
           </span>
         </h1>
@@ -85,14 +85,14 @@ const handleWithdraw = () => {
         <div class="flex gap-2.5 mb-3 justify-center">
           <button
             @click="handleDeposit"
-            class="flex items-center justify-center gap-2 bg-primary font-bold rounded-full text-white px-6 py-2.5"
+            class="flex items-center w-full justify-center gap-2 bg-primary font-bold rounded-full text-white px-6 py-2.5"
           >
             <Icons name="down-arrow" :size="11" />
             Пополнить
           </button>
           <button
             @click="handleWithdraw"
-            class="flex items-center justify-center gap-2 bg-white font-bold rounded-full text-[#484C52] px-6 py-2.5"
+            class="flex items-center w-full justify-center gap-2 bg-white font-bold rounded-full text-[#484C52] px-6 py-2.5"
           >
             Вывести
             <Icons name="up-arrow" :size="11" />
