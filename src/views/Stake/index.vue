@@ -77,7 +77,7 @@ const handleWithdraw = () => {
           </span>
           или
           <span :class="[coinsStyle, '!bg-[#FFA32F]', 'text-[#484C52]']">
-            <Icons name="star-circle" :size="14" />
+            <Icons name="star-circle" :size="14" class="mr-0.5"/>
             STARS
           </span>
         </h1>
