@@ -143,19 +143,19 @@ const handleWithdraw = () => {
   background-repeat: no-repeat;
 }
 .main-block {
-  background-image: url('@/assets/images/stake/main-block.png');
+  background-image: url('@/assets/images/stake/main-block.svg');
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
 }
 .ton-block {
-  background-image: url('@/assets/images/stake/ton-block.png');
+  background-image: url('@/assets/images/stake/ton-block.svg');
   background-size: cover;
   background-position: bottom;
   background-repeat: no-repeat;
 }
 .star-block {
-  background-image: url('@/assets/images/stake/star-block.png');
+  background-image: url('@/assets/images/stake/star-block.svg');
   background-size: cover;
   background-position: bottom;
   background-repeat: no-repeat;
