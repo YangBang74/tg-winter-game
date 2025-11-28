@@ -108,7 +108,7 @@ const handleWithdraw = () => {
 
       <div class="flex gap-2.5 w-full">
         <!-- TON Balance Card -->
-        <div class="ton-block flex-1 rounded-2xl overflow-hidden relative h-32">
+        <div class="block-bg bg-primary flex-1 rounded-2xl overflow-hidden relative h-32">
           <div class="absolute inset-0 p-3 flex flex-col justify-start items-center">
             <div class="flex items-center gap-1 bg-white text-[#484C52] rounded-full px-5 py-1.5">
               <Icons name="ton" :size="14" class="" />
@@ -117,11 +117,19 @@ const handleWithdraw = () => {
             <div>
               <p class="text-white text-[0.625rem]">Вы заработали</p>
             </div>
+            <div class="relative w-full h-full">
+              <img
+                src="@/assets/images/stake/ton-block.png"
+                alt=""
+                class="w-full h-full object-contain absolute left-0 -bottom-2"
+              />
+            </div>
           </div>
+          <img src="@/assets/images/stake/snow.png" alt="" class="absolute -bottom-2 left-0" />
         </div>
 
         <!-- STARS Balance Card -->
-        <div class="star-block flex-1 rounded-2xl overflow-hidden relative h-32">
+        <div class="block-bg bg-[#EB8700] flex-1 rounded-2xl overflow-hidden relative h-32">
           <div class="absolute inset-0 p-3 flex flex-col justify-start items-center">
             <div class="flex items-center gap-1 bg-white text-[#484C52] rounded-full px-5 py-1.5">
               <Icons name="star-circle" :size="12" class="" />
@@ -130,7 +138,15 @@ const handleWithdraw = () => {
             <div>
               <p class="text-white text-[0.625rem]">Вы заработали</p>
             </div>
+            <div class="relative w-full h-full">
+              <img
+                src="@/assets/images/stake/star-block.png"
+                alt=""
+                class="w-full h-full object-contain absolute left-0 -bottom-2"
+              />
+            </div>
           </div>
+          <img src="@/assets/images/stake/snow.png" alt="" class="absolute -bottom-2 left-0" />
         </div>
       </div>
     </div>
@@ -165,16 +181,12 @@ const handleWithdraw = () => {
   background-position: top;
   background-repeat: no-repeat;
 }
-.ton-block {
-  background-image: url('@/assets/images/stake/ton-block.svg');
+
+.block-bg {
+  background-image: url('@/assets/images/stake/block.png');
   background-size: cover;
-  background-position: bottom;
+  background-position: top right;
   background-repeat: no-repeat;
 }
-.star-block {
-  background-image: url('@/assets/images/stake/star-block.svg');
-  background-size: cover;
-  background-position: bottom;
-  background-repeat: no-repeat;
-}
+
 </style>
