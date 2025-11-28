@@ -76,7 +76,7 @@ const handleWithdraw = () => {
         </span>
         или
         <span :class="[coinsStyle, '!bg-[#FFA32F]', 'text-[#484C52]']">
-          <Icons name="star" :size="13" />
+          <Icons name="star-circle" :size="14" />
           STARS
         </span>
       </h1>
@@ -84,14 +84,14 @@ const handleWithdraw = () => {
       <div class="flex gap-2.5 mb-3 justify-center">
         <button
           @click="handleDeposit"
-          class="flex items-center justify-center gap-2 bg-primary font-bold rounded-full text-white px-4 py-2.5"
+          class="flex items-center justify-center gap-2 bg-primary font-bold rounded-full text-white px-6 py-2.5"
         >
           <Icons name="down-arrow" :size="11" />
           Пополнить
         </button>
         <button
           @click="handleWithdraw"
-          class="flex items-center justify-center gap-2 bg-white font-bold rounded-full text-[#484C52] px-4 py-2.5"
+          class="flex items-center justify-center gap-2 bg-white font-bold rounded-full text-[#484C52] px-6 py-2.5"
         >
           Вывести
           <Icons name="up-arrow" :size="11" />
