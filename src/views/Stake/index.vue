@@ -102,7 +102,8 @@ const handleWithdraw = () => {
         <div
           class="text-white text-sm absolute left-0 right-0 font-bold bottom-0 rounded-b-2xl py-2.5 bg-[#5F9C58] w-full"
         >
-          Начисление через: {{ formattedTime }}
+          Начисление через:
+          <span class="font-bold ml-1.5">{{ formattedTime }}</span>
         </div>
       </div>
 
@@ -188,5 +189,4 @@ const handleWithdraw = () => {
   background-position: top right;
   background-repeat: no-repeat;
 }
-
 </style>
