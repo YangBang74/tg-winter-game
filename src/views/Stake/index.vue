@@ -155,7 +155,7 @@ const handleWithdraw = () => {
       <img
         src="@/assets/images/stake/tree.svg"
         alt="TON & STARS background"
-        class="object-contain absolute -bottom-1 left-0 w-[110%] h-[110%]"
+        class="object-contain absolute -bottom-4 left-0 w-[110%] h-[112%]"
       />
     </div>
   </div>
@@ -164,7 +164,7 @@ const handleWithdraw = () => {
     <img
       src="@/assets/images/stake/snow.png"
       alt="TON & STARS background"
-      class="object-cover absolute left-0 w-full -bottom-4"
+      class="object-cover absolute left-0 w-full -bottom-7"
     />
   </div>
 </template>
