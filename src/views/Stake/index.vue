@@ -64,74 +64,91 @@ const handleWithdraw = () => {
 
 <template>
   <div
-    class="game-intro relative -bottom-2 p-4 pt-0 h-[calc(100vh-9rem)] flex flex-col items-center justify-start gap-2.5 mt-4"
+    class="game-intro relative overflow-hidden -bottom-2 p-4 pt-0 h-[calc(100vh-9rem)] flex flex-col items-center justify-start gap-2.5 mt-4"
   >
-    <div class="main-block relative rounded-2xl text-center px-2.5 pt-4 pb-10 w-full">
-      <h1 class="text-[1.25rem] leading-7.5 text-white font-bold uppercase mb-4">
-        Получайте до 1% наград <br />
-        в
-        <span :class="[coinsStyle, 'bg-primary']">
-          <Icons name="ton" :size="16" />
-          TON
-        </span>
-        или
-        <span :class="[coinsStyle, '!bg-[#FFA32F]', 'text-[#484C52]']">
-          <Icons name="star-circle" :size="14" />
-          STARS
-        </span>
-      </h1>
+    <div class="flex-1 w-full space-y-2.5">
+      <div class="main-block relative rounded-2xl text-center px-2.5 pt-4 pb-10 w-full">
+        <h1 class="text-[1.25rem] leading-7.5 text-white font-bold uppercase mb-4">
+          Получайте до 1% наград <br />
+          в
+          <span :class="[coinsStyle, 'bg-primary']">
+            <Icons name="ton" :size="16" />
+            TON
+          </span>
+          или
+          <span :class="[coinsStyle, '!bg-[#FFA32F]', 'text-[#484C52]']">
+            <Icons name="star-circle" :size="14" />
+            STARS
+          </span>
+        </h1>
 
-      <div class="flex gap-2.5 mb-3 justify-center">
-        <button
-          @click="handleDeposit"
-          class="flex items-center justify-center gap-2 bg-primary font-bold rounded-full text-white px-6 py-2.5"
+        <div class="flex gap-2.5 mb-3 justify-center">
+          <button
+            @click="handleDeposit"
+            class="flex items-center justify-center gap-2 bg-primary font-bold rounded-full text-white px-6 py-2.5"
+          >
+            <Icons name="down-arrow" :size="11" />
+            Пополнить
+          </button>
+          <button
+            @click="handleWithdraw"
+            class="flex items-center justify-center gap-2 bg-white font-bold rounded-full text-[#484C52] px-6 py-2.5"
+          >
+            Вывести
+            <Icons name="up-arrow" :size="11" />
+          </button>
+        </div>
+
+        <div
+          class="text-white text-sm absolute left-0 right-0 font-bold bottom-0 rounded-b-2xl py-2.5 bg-[#5F9C58] w-full"
         >
-          <Icons name="down-arrow" :size="11" />
-          Пополнить
-        </button>
-        <button
-          @click="handleWithdraw"
-          class="flex items-center justify-center gap-2 bg-white font-bold rounded-full text-[#484C52] px-6 py-2.5"
-        >
-          Вывести
-          <Icons name="up-arrow" :size="11" />
-        </button>
-      </div>
-
-      <div
-        class="text-white text-sm absolute left-0 right-0 font-bold bottom-0 rounded-b-2xl py-2.5 bg-[#5F9C58] w-full"
-      >
-        Начисление через: {{ formattedTime }}
-      </div>
-    </div>
-
-    <div class="flex gap-2.5 w-full">
-      <!-- TON Balance Card -->
-      <div class="ton-block flex-1 rounded-2xl overflow-hidden relative h-32">
-        <div class="absolute inset-0 p-3 flex flex-col justify-start items-center">
-          <div class="flex items-center gap-1 bg-white text-[#484C52] rounded-full px-5 py-1.5">
-            <Icons name="ton" :size="14" class="" />
-            <p class="font-bold text-xs">{{ tonBalance }} TON</p>
-          </div>
-          <div>
-            <p class="text-white text-[0.625rem]">Вы заработали</p>
-          </div>
+          Начисление через: {{ formattedTime }}
         </div>
       </div>
 
-      <!-- STARS Balance Card -->
-      <div class="star-block flex-1 rounded-2xl overflow-hidden relative h-32">
-        <div class="absolute inset-0 p-3 flex flex-col justify-start items-center">
-          <div class="flex items-center gap-1 bg-white text-[#484C52] rounded-full px-5 py-1.5">
-            <Icons name="star-circle" :size="12" class="" />
-            <p class="font-bold text-xs">{{ starsBalance }} STARS</p>
+      <div class="flex gap-2.5 w-full">
+        <!-- TON Balance Card -->
+        <div class="ton-block flex-1 rounded-2xl overflow-hidden relative h-32">
+          <div class="absolute inset-0 p-3 flex flex-col justify-start items-center">
+            <div class="flex items-center gap-1 bg-white text-[#484C52] rounded-full px-5 py-1.5">
+              <Icons name="ton" :size="14" class="" />
+              <p class="font-bold text-xs">{{ tonBalance }} TON</p>
+            </div>
+            <div>
+              <p class="text-white text-[0.625rem]">Вы заработали</p>
+            </div>
           </div>
-          <div>
-            <p class="text-white text-[0.625rem]">Вы заработали</p>
+        </div>
+
+        <!-- STARS Balance Card -->
+        <div class="star-block flex-1 rounded-2xl overflow-hidden relative h-32">
+          <div class="absolute inset-0 p-3 flex flex-col justify-start items-center">
+            <div class="flex items-center gap-1 bg-white text-[#484C52] rounded-full px-5 py-1.5">
+              <Icons name="star-circle" :size="12" class="" />
+              <p class="font-bold text-xs">{{ starsBalance }} STARS</p>
+            </div>
+            <div>
+              <p class="text-white text-[0.625rem]">Вы заработали</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="relative w-full h-full">
+      <img
+        src="@/assets/images/stake/tree.svg"
+        alt="TON & STARS background"
+        class="object-contain absolute -bottom-1 left-0 w-[110%] h-[110%]"
+      />
+    </div>
+  </div>
+
+  <div class="relative w-full h-full">
+    <img
+      src="@/assets/images/stake/snow.png"
+      alt="TON & STARS background"
+      class="object-cover absolute left-0 w-full -bottom-4"
+    />
   </div>
 </template>
 
