@@ -14,6 +14,8 @@ import LotteryView from '@/views/Lottery/index.vue'
 import GameView from '@/views/Game/index.vue'
 import GamePlayView from '@/views/Game/GamePlay/index.vue'
 import StakeView from '@/views/Stake/index.vue'
+import LeadersView from '@/views/Leaders/index.vue'
+import ShopView from '@/views/Shop/index.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -82,6 +84,16 @@ const router = createRouter({
           name: 'stake',
           component: StakeView,
         },
+        {
+          path: 'leaders',
+          name: 'leaders',
+          component: LeadersView,
+        },
+        {
+          path: 'shop',
+          name: 'shop',
+          component: ShopView,
+        }
       ],
     },
     {

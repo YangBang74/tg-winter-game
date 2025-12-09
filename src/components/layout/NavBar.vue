@@ -17,7 +17,7 @@ const isActive = (name: string) => route.name === name
 
 <template>
   <nav
-    class="fixed bottom-0 left-0 right-0 flex items-end justify-between rounded-t-[1.125rem] bg-[#023A35] px-4 pb-6 pt-2"
+    class="fixed bottom-0 z-100 left-0 right-0 flex items-end justify-between rounded-t-[1.125rem] bg-[#023A35] px-4 pb-6 pt-2"
   >
     <template v-for="(item, index) in navItems" :key="item.name">
       <RouterLink
