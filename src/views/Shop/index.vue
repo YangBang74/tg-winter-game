@@ -13,9 +13,9 @@ const coinsStyle =
 
     <div class="flex-1 w-full space-y-2.5">
       <div
-        class="main-block overflow-hidden relative rounded-2xl text-center px-4 pt-4 pb-10 w-full"
+        class="main-block overflow-hidden flex items-center justify-center relative rounded-2xl text-center p-4 h-34 w-full"
       >
-        <h1 class="text-[1.25rem] leading-7.5 text-white font-bold uppercase mb-4">
+        <h1 class="text-[1.25rem] leading-7.5 text-white font-bold uppercase z-10">
           заработй больше <br />
           <span :class="[coinsStyle, 'bg-primary']">
             <Icons name="ton" :size="16" />
