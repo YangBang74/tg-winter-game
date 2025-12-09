@@ -92,14 +92,14 @@ const leaders = [
         <span class="text-[0.625rem] font-bold">{{ user.ton }}</span>
       </div>
     </div>
-    <div class="flex items-center justify-stretch gap-2.5 mt-14">
+    <div class="flex items-center justify-center gap-2.5 mt-14 w-full">
       <div
-        class="rounded-xl relative h-[90%] bg-linear-to-b from-[#38434A] to-[#38434A]/0 pb-[11px] px-3.5 w-full"
+        class="rounded-xl flex flex-col items-center relative h-[90%] bg-linear-to-b w-26.75 from-[#38434A] to-[#38434A]/0 pb-[11px] px-3.5"
       >
         <img
           src="@/assets/images/leaders/second.svg"
           alt=""
-          class="absolute bottom-25 w-full h-full right-0"
+          class="absolute bottom-26 w-full h-full right-0"
         />
         <div
           class="border-3 z-10 relative bottom-7 border-[#748189] rounded-full bg-[#38434A] size-[4.375rem]"
@@ -127,7 +127,7 @@ const leaders = [
         </div>
       </div>
       <div
-        class="rounded-xl relative h-[90%] bg-linear-to-b from-[#FFCC00] to-[#FFCC00]/0 pb-[11px] px-3.5 w-full"
+        class="rounded-xl flex flex-col items-center relative h-[90%] bg-linear-to-b w-26.75 from-[#FFCC00] to-[#FFCC00]/0 pb-[11px] px-3.5"
       >
         <div class="z-10 relative bottom-7 size-[4.375rem]">
           <img
@@ -159,12 +159,12 @@ const leaders = [
         </div>
       </div>
       <div
-        class="rounded-xl relative h-[90%] bg-linear-to-b from-[#AF7A63] to-[#AF7A63]/0 pb-[11px] px-3.5 w-full"
+        class="rounded-xl flex flex-col items-center relative h-[90%] bg-linear-to-b w-26.75 from-[#AF7A63] to-[#AF7A63]/0 pb-[11px] px-3.5"
       >
         <img
           src="@/assets/images/leaders/third.svg"
           alt=""
-          class="absolute bottom-35 w-full right-0"
+          class="absolute bottom-38 w-full right-0"
         />
         <div class="z-10 relative bottom-7 size-[4.375rem]">
           <img
